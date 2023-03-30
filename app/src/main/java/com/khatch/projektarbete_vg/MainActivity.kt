@@ -6,7 +6,7 @@ import com.khatch.projektarbete_vg.counter.CounterViewModel
 import com.khatch.projektarbete_vg.databinding.ActivityMainBinding
 import androidx.activity.viewModels
 
-/* https://www.googleapis.com/books/v1/volumes?q=lilla+fruntimmer&callback=handleResponse */
+/* https://www.googleapis.com/books/v1/volumes?q=lilla+fruntimmer */
 
 class MainActivity : AppCompatActivity() {
     /* Initialize ViewBinding */
@@ -24,6 +24,8 @@ class MainActivity : AppCompatActivity() {
 
         // ID's
         val tvBookFinder = binding.tvBookFinder
+        val tvGoogleBooksApi = binding.tvGoogleBooksApi // TextView
+        val ivGoogleBooks = binding.ivGoogleBooks    // ImageView
 
         // OnClick's
         tvBookFinder.setOnClickListener() {}
