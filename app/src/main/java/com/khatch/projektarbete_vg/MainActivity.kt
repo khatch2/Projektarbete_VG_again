@@ -17,7 +17,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 class MainActivity : AppCompatActivity() {
     /* Initialize ViewBinding */
     private lateinit var binding:ActivityMainBinding
-    private var baseUrl = "https://www.googleapis.com/"
+    //private var baseUrl = "https://www.googleapis.com/"
     private var querySentence = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,6 +35,7 @@ class MainActivity : AppCompatActivity() {
         val tvGoogleBooksApi = binding.tvGoogleBooksApi // TextView
         val ivGoogleBooks = binding.ivGoogleBooks    // ImageView
         val edEnterDesiredBook = binding.edEnterDesiredBook
+        val btnBookSearch = binding.btnBookSearch
 
         if (edEnterDesiredBook.text.toString() == "") {
             querySentence = "lilla fruntimmer"
@@ -45,18 +46,21 @@ class MainActivity : AppCompatActivity() {
         tvGoogleBooksApi.setOnClickListener() {}
         ivGoogleBooks.setOnClickListener() {}
         edEnterDesiredBook.setOnClickListener() {}
+        btnBookSearch.setOnClickListener() {}
 
         val retrofit = Retrofit.Builder()
-            .baseUrl(baseUrl)
+            .baseUrl("https://www.googleapis.com/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
+        println("retrofit = "+retrofit.toString())
         val desiredBook = retrofit.create<IGoogleBooks>().getDesiredBook()
-
+        println("desiredBook = "+desiredBook.toString())
         desiredBook.enqueue(object : Callback<GoogleBooks> {
             override fun onResponse(call: Call<GoogleBooks>, response: Response<GoogleBooks>) {
 
                 // Status code 200 - 300
                 if (response.isSuccessful) {
+                    println("response.body() = "+response.body())
                     val myDesiredGoogleBooks = response.body()
 
                     // Is FOX NOT null?
@@ -76,7 +80,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onFailure(call: Call<GoogleBooks>, t: Throwable) {
-                TODO("Not yet implemented")
+                println( t.toString() )
             }
         })
     }
