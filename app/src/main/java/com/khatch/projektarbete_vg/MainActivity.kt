@@ -2,7 +2,11 @@ package com.khatch.projektarbete_vg
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.khatch.projektarbete_vg.counter.CounterViewModel
 import com.khatch.projektarbete_vg.databinding.ActivityMainBinding
+import androidx.activity.viewModels
+
+/* https://www.googleapis.com/books/v1/volumes?q=lilla+fruntimmer&callback=handleResponse */
 
 class MainActivity : AppCompatActivity() {
     /* Initialize ViewBinding */
@@ -13,5 +17,15 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         //setContentView(R.layout.activity_main)
+
+        // ViewModel's
+        val counterViewModel by viewModels <CounterViewModel>()
+        println(" counterViewModel = $counterViewModel ")
+
+        // ID's
+        val tvBookFinder = binding.tvBookFinder
+
+        // OnClick's
+        tvBookFinder.setOnClickListener() {}
     }
 }
