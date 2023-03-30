@@ -5,10 +5,12 @@ import android.os.Bundle
 import com.khatch.projektarbete_vg.counter.CounterViewModel
 import com.khatch.projektarbete_vg.databinding.ActivityMainBinding
 import androidx.activity.viewModels
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
+import com.khatch.projektarbete_vg.apiGoogleBooks.GoogleBooks
 import com.khatch.projektarbete_vg.apiGoogleBooks.IGoogleBooks
-import retrofit2.Retrofit
+import retrofit2.*
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.create
 
 /* https://www.googleapis.com/books/v1/volumes?q=lilla+fruntimmer */
 
@@ -49,7 +51,34 @@ class MainActivity : AppCompatActivity() {
             .addConverterFactory(GsonConverterFactory.create())
             .build()
         val desiredBook = retrofit.create<IGoogleBooks>().getDesiredBook()
-        
 
+        desiredBook.enqueue(object : Callback<GoogleBooks> {
+            override fun onResponse(call: Call<GoogleBooks>, response: Response<GoogleBooks>) {
+
+                // Status code 200 - 300
+                if (response.isSuccessful) {
+                    val myDesiredGoogleBooks = response.body()
+
+                    // Is FOX NOT null?
+                    if (myDesiredGoogleBooks != null) {
+                        tvGoogleBooksApi.text = myDesiredGoogleBooks.myImage
+
+                        // Load Image
+                        Glide.with(binding.root)
+                            .load(myDesiredGoogleBooks.myImage)
+                            .apply(RequestOptions.overrideOf(450))
+                            .into(ivGoogleBooks)
+                    }
+                } else {
+                    println("ERROR")
+                }
+
+            }
+
+            override fun onFailure(call: Call<GoogleBooks>, t: Throwable) {
+                TODO("Not yet implemented")
+            }
+        })
     }
 }
+
