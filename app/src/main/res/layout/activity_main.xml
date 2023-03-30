@@ -7,9 +7,13 @@
     tools:context=".MainActivity">
 
     <TextView
+        android:id="@+id/tv_bookFinder"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
+        android:background="#FEED00"
+        android:fontFamily="times"
+        android:text="Bokens Hittaren"
+        android:textColor="@android:color/holo_red_dark"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
