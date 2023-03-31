@@ -64,6 +64,7 @@ class MainActivity : AppCompatActivity() {
                     counterSearchesViewModel.uiState.value.searchQueries.get(
                         counterSearchesViewModel.uiState.value.searchQueries.size -1
                     ).toString()
+                println("serchQueries are: "+counterSearchesViewModel.uiState.value.searchQueries.toString())
         }
         tvCounterSearchesValue.setOnClickListener() {}
 
