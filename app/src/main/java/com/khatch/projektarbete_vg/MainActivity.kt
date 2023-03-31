@@ -5,10 +5,15 @@ import android.os.Bundle
 import com.khatch.projektarbete_vg.counter.CounterViewModel
 import com.khatch.projektarbete_vg.databinding.ActivityMainBinding
 import androidx.activity.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.khatch.projektarbete_vg.apiGoogleBooks.GoogleBooks
 import com.khatch.projektarbete_vg.apiGoogleBooks.IGoogleBooks
+import com.khatch.projektarbete_vg.counterSearches.CounterSearchesViewModel
+import kotlinx.coroutines.launch
 import retrofit2.*
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -27,8 +32,10 @@ class MainActivity : AppCompatActivity() {
         //setContentView(R.layout.activity_main)
 
         // ViewModel's
-        val counterViewModel by viewModels <CounterViewModel>()
-        println(" counterViewModel = $counterViewModel ")
+        val counterSearchesViewModel by viewModels<CounterSearchesViewModel>()
+        //val counterViewModel by viewModels <CounterViewModel>()
+        println(" counterSearchesViewModel = $counterSearchesViewModel ")
+
 
         // ID's
         val tvBookFinder = binding.tvBookFinder
@@ -36,6 +43,7 @@ class MainActivity : AppCompatActivity() {
         val ivGoogleBooks = binding.ivGoogleBooks    // ImageView
         val edEnterDesiredBook = binding.edEnterDesiredBook
         val btnBookSearch = binding.btnBookSearch
+        val tvCounterSearchesValue = binding.tvCounterSearchesValue
 
         if (edEnterDesiredBook.text.toString() == "") {
             querySentence = "lilla fruntimmer"
@@ -47,7 +55,20 @@ class MainActivity : AppCompatActivity() {
         ivGoogleBooks.setOnClickListener() {}
         edEnterDesiredBook.setOnClickListener() {}
         btnBookSearch.setOnClickListener() {
+            counterSearchesViewModel.push(edEnterDesiredBook.text.toString())
+        }
+        tvCounterSearchesValue.setOnClickListener() {}
 
+        // ViewModel LifeCycle
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                counterSearchesViewModel.uiState.collect() {
+                    // Update UI Elements
+                    tvCounterSearchesValue.text =
+                        counterSearchesViewModel.uiState.value.searchQueries.toString()
+
+                }
+            }
         }
 
         val retrofit = Retrofit.Builder()
