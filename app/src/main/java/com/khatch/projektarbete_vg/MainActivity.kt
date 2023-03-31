@@ -54,8 +54,16 @@ class MainActivity : AppCompatActivity() {
         tvGoogleBooksApi.setOnClickListener() {}
         ivGoogleBooks.setOnClickListener() {}
         edEnterDesiredBook.setOnClickListener() {}
+
         btnBookSearch.setOnClickListener() {
             counterSearchesViewModel.push(edEnterDesiredBook.text.toString())
+
+            if(counterSearchesViewModel.uiState.value.searchQueries.isNotEmpty()) {
+                // Update UI Elements
+                tvCounterSearchesValue.text =
+                    counterSearchesViewModel.uiState.value.searchQueries.get(
+                        counterSearchesViewModel.uiState.value.searchQueries.size -1
+                    ).toString()
         }
         tvCounterSearchesValue.setOnClickListener() {}
 
@@ -63,10 +71,7 @@ class MainActivity : AppCompatActivity() {
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 counterSearchesViewModel.uiState.collect() {
-                    if(counterSearchesViewModel.uiState.value.searchQueries.isNotEmpty()) {
-                        // Update UI Elements
-                        tvCounterSearchesValue.text =
-                            counterSearchesViewModel.uiState.value.searchQueries.toString()
+
                     }
                 }
             }
