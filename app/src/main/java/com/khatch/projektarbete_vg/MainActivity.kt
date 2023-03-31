@@ -129,7 +129,15 @@ class MainActivity : AppCompatActivity() {
             override fun onFailure(call: Call<List<GoogleBooks>>, t: Throwable) {
                 // ERROR + 404 Not found
                 // ERROR + No Internet Connection
-                println(" ERROR  = ${t.printStackTrace()}")
+                println(" ERROR  = ${t.message}")
+                println(t.localizedMessage)
+                println(t.fillInStackTrace())
+
+                println()
+                println(" call.request() "+call.request())
+                println(" call.toString() "+call.toString())
+                println(" call.isExecuted "+call.isExecuted)
+                println("call.timeout() "+call.timeout().toString())
             }
         })
 
