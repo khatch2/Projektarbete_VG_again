@@ -46,7 +46,9 @@ class MainActivity : AppCompatActivity() {
         tvGoogleBooksApi.setOnClickListener() {}
         ivGoogleBooks.setOnClickListener() {}
         edEnterDesiredBook.setOnClickListener() {}
-        btnBookSearch.setOnClickListener() {}
+        btnBookSearch.setOnClickListener() {
+            
+        }
 
         val retrofit = Retrofit.Builder()
             .baseUrl("https://www.googleapis.com/")
