@@ -98,7 +98,40 @@ class MainActivity : AppCompatActivity() {
         println("retrofit = $retrofit")
         val desiredBook = retrofit.create<IGoogleBooks>().getDesiredBook(querySentence)
         println("desiredBook = ${desiredBook.toString()}")
-        
+
+        desiredBook.enqueue(object : Callback<List<GoogleBooks>> {
+            override fun onResponse(
+                call: Call<List<GoogleBooks>>,
+                response: Response<List<GoogleBooks>>
+            ) {
+                // Status code 200 - 300
+                if (response.isSuccessful) {
+                    val myBook = response.body()
+
+                    // Is myBook NOT null?
+                    if (myBook != null) {
+                        tvGoogleBooksApi.text = myBook.get(0).myTitle
+                        // Load Image
+                        Glide.with(binding.root)
+                            .load(myBook.get(0).myImage)
+                            .apply(RequestOptions.overrideOf(450))
+                            .into(ivGoogleBooks)
+
+
+                    }
+
+                } else {
+                    println("ERROR")
+                    println(" errorBody(): "+response.errorBody())
+                }
+            }
+
+            override fun onFailure(call: Call<List<GoogleBooks>>, t: Throwable) {
+                // ERROR + 404 Not found
+                // ERROR + No Internet Connection
+                println(" ERROR  = ${t.printStackTrace()}")
+            }
+        })
 
     }
 }
