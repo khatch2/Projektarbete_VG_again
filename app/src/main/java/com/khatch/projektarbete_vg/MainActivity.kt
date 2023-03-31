@@ -18,7 +18,7 @@ import kotlinx.coroutines.launch
 import retrofit2.*
 import retrofit2.converter.gson.GsonConverterFactory
 
-/* https://www.googleapis.com/books/v1/volumes?q=lilla+fruntimmer */
+/* https://www.googleapis.com/books/v1/volumes?q=fruntimmer */
 
 class MainActivity : AppCompatActivity() {
     /* Initialize ViewBinding */
@@ -47,7 +47,7 @@ class MainActivity : AppCompatActivity() {
         val tvCounterSearchesValue = binding.tvCounterSearchesValue
 
         if (edEnterDesiredBook.text.toString() == "") {
-            querySentence = "lilla fruntimmer"
+            querySentence = "fruntimmer"
         }
 
         // OnClick's
@@ -96,36 +96,10 @@ class MainActivity : AppCompatActivity() {
             .addConverterFactory(GsonConverterFactory.create())
             .build()
         println("retrofit = $retrofit")
-        val desiredBook = retrofit.create<IGoogleBooks>().getDesiredBook()
-        println("desiredBook = $desiredBook")
-        desiredBook.enqueue(object : Callback<GoogleBooks> {
-            override fun onResponse(call: Call<GoogleBooks>, response: Response<GoogleBooks>) {
+        val desiredBook = retrofit.create<IGoogleBooks>().getDesiredBook(querySentence)
+        println("desiredBook = ${desiredBook.toString()}")
+        
 
-                // Status code 200 - 300
-                if (response.isSuccessful) {
-                    println("response.body() = ${response.body()}")
-                    val myDesiredGoogleBooks = response.body()
-
-                    // Is FOX NOT null?
-                    if (myDesiredGoogleBooks != null) {
-                        tvGoogleBooksApi.text = myDesiredGoogleBooks.myImage
-
-                        // Load Image
-                        Glide.with(binding.root)
-                            .load(myDesiredGoogleBooks.myImage)
-                            .apply(RequestOptions.overrideOf(450))
-                            .into(ivGoogleBooks)
-                    }
-                } else {
-                    println("ERROR")
-                }
-
-            }
-
-            override fun onFailure(call: Call<GoogleBooks>, t: Throwable) {
-                println( t.toString() )
-            }
-        })
     }
 }
 

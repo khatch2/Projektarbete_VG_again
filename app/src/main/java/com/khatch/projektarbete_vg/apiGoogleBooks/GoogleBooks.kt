@@ -2,7 +2,7 @@ package com.khatch.projektarbete_vg.apiGoogleBooks
 
 import com.google.gson.annotations.SerializedName
 
-class GoogleBooks {
+data class GoogleBooks(var internalQuery: String = "karl") {
     // Template from API Object
     @SerializedName("smallThumbnail") val myImage : String = ""
 
