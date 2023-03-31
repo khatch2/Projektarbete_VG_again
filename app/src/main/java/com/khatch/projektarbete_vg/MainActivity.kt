@@ -47,7 +47,7 @@ class MainActivity : AppCompatActivity() {
         ivGoogleBooks.setOnClickListener() {}
         edEnterDesiredBook.setOnClickListener() {}
         btnBookSearch.setOnClickListener() {
-            
+
         }
 
         val retrofit = Retrofit.Builder()

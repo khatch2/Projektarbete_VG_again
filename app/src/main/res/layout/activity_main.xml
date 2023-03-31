@@ -47,11 +47,13 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginTop="52dp"
+        android:layout_marginEnd="14dp"
         android:ems="10"
         android:fontFamily="times"
         android:hint="Enter desired book?"
         android:inputType="textPersonName"
         android:minHeight="48dp"
+        app:layout_constraintEnd_toStartOf="@+id/btn_BookSearch"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_bookFinder" />
 
@@ -59,10 +61,12 @@
         android:id="@+id/btn_BookSearch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="3dp"
         android:fontFamily="times"
         android:text="Search"
         android:textAllCaps="false"
-        tools:layout_editor_absoluteX="288dp"
-        tools:layout_editor_absoluteY="297dp" />
+        app:layout_constraintBaseline_toBaselineOf="@+id/ed_EnterDesiredBook"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/ed_EnterDesiredBook" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
