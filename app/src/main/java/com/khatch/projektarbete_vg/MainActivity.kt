@@ -2,6 +2,7 @@ package com.khatch.projektarbete_vg
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import com.khatch.projektarbete_vg.counter.CounterViewModel
 import com.khatch.projektarbete_vg.databinding.ActivityMainBinding
 import androidx.activity.viewModels
@@ -64,7 +65,19 @@ class MainActivity : AppCompatActivity() {
                     counterSearchesViewModel.uiState.value.searchQueries.get(
                         counterSearchesViewModel.uiState.value.searchQueries.size -1
                     ).toString()
-                println("serchQueries are: "+counterSearchesViewModel.uiState.value.searchQueries.toString())
+                println("searchQueries are: "+counterSearchesViewModel.uiState.value.searchQueries.toString())
+                println("==== counterSearchesviewModel.uiState.value.searchQueries ====")
+
+                print("  Search history : ")
+                for (item in counterSearchesViewModel.uiState.value.searchQueries) {
+                    print("  $item  ")
+                }
+                println()
+                println("=== END ===")
+                Toast.makeText(this,
+                    "{ ${edEnterDesiredBook.text} } has been added to " +
+                            "the search history successfully. ",
+                    Toast.LENGTH_LONG).show()
         }
         tvCounterSearchesValue.setOnClickListener() {}
 
@@ -82,15 +95,15 @@ class MainActivity : AppCompatActivity() {
             .baseUrl("https://www.googleapis.com/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
-        println("retrofit = "+retrofit.toString())
+        println("retrofit = $retrofit")
         val desiredBook = retrofit.create<IGoogleBooks>().getDesiredBook()
-        println("desiredBook = "+desiredBook.toString())
+        println("desiredBook = $desiredBook")
         desiredBook.enqueue(object : Callback<GoogleBooks> {
             override fun onResponse(call: Call<GoogleBooks>, response: Response<GoogleBooks>) {
 
                 // Status code 200 - 300
                 if (response.isSuccessful) {
-                    println("response.body() = "+response.body())
+                    println("response.body() = ${response.body()}")
                     val myDesiredGoogleBooks = response.body()
 
                     // Is FOX NOT null?
