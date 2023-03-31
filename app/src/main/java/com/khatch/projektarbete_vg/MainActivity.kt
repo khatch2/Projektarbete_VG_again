@@ -63,10 +63,11 @@ class MainActivity : AppCompatActivity() {
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 counterSearchesViewModel.uiState.collect() {
-                    // Update UI Elements
-                    tvCounterSearchesValue.text =
-                        counterSearchesViewModel.uiState.value.searchQueries.toString()
-
+                    if(counterSearchesViewModel.uiState.value.searchQueries.isNotEmpty()) {
+                        // Update UI Elements
+                        tvCounterSearchesValue.text =
+                            counterSearchesViewModel.uiState.value.searchQueries.toString()
+                    }
                 }
             }
         }
