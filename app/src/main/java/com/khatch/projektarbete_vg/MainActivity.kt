@@ -99,21 +99,20 @@ class MainActivity : AppCompatActivity() {
         val desiredBook = retrofit.create<IGoogleBooks>().getDesiredBook(querySentence)
         println("desiredBook = ${desiredBook.toString()}")
 
-        desiredBook.enqueue(object : Callback<List<GoogleBooks>> {
-            override fun onResponse(
-                call: Call<List<GoogleBooks>>,
-                response: Response<List<GoogleBooks>>
-            ) {
+        desiredBook.enqueue(object : Callback<GoogleBooks> {
+            override fun onResponse( call: Call<GoogleBooks>, response: Response<GoogleBooks> ) {
                 // Status code 200 - 300
                 if (response.isSuccessful) {
                     val myBook = response.body()
 
                     // Is myBook NOT null?
                     if (myBook != null) {
-                        tvGoogleBooksApi.text = myBook.get(0).myTitle
+                        //tvGoogleBooksApi.text = myBook.get(0).myTitle
+                        tvGoogleBooksApi.text = myBook.myTitle
                         // Load Image
                         Glide.with(binding.root)
-                            .load(myBook.get(0).myImage)
+                            // .load(myBook.get(0).myImage)
+                            .load(myBook.myImage)
                             .apply(RequestOptions.overrideOf(450))
                             .into(ivGoogleBooks)
 
@@ -126,7 +125,7 @@ class MainActivity : AppCompatActivity() {
                 }
             }
 
-            override fun onFailure(call: Call<List<GoogleBooks>>, t: Throwable) {
+            override fun onFailure(call: Call<GoogleBooks>, t: Throwable) {
                 // ERROR + 404 Not found
                 // ERROR + No Internet Connection
                 println(" ERROR  = ${t.message}")
@@ -139,6 +138,7 @@ class MainActivity : AppCompatActivity() {
                 println(" call.isExecuted "+call.isExecuted)
                 println("call.timeout() "+call.timeout().toString())
             }
+
         })
 
     }
