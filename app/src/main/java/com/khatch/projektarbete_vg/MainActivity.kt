@@ -66,7 +66,7 @@ class MainActivity : AppCompatActivity() {
                         counterSearchesViewModel.uiState.value.searchQueries.size -1
                     ).toString()
                 println("searchQueries are: "+counterSearchesViewModel.uiState.value.searchQueries.toString())
-                println("==== counterSearchesviewModel.uiState.value.searchQueries ====")
+                println("==== counterSearchesViewModel.uiState.value.searchQueries ====")
 
                 print("  Search history : ")
                 for (item in counterSearchesViewModel.uiState.value.searchQueries) {
