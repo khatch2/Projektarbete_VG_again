@@ -3,7 +3,6 @@ package com.khatch.projektarbete_vg
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
-import com.khatch.projektarbete_vg.counter.CounterViewModel
 import com.khatch.projektarbete_vg.databinding.ActivityMainBinding
 import androidx.activity.viewModels
 import androidx.lifecycle.Lifecycle
@@ -18,6 +17,15 @@ import kotlinx.coroutines.launch
 import retrofit2.*
 import retrofit2.converter.gson.GsonConverterFactory
 
+import androidx.lifecycle.lifecycleScope
+import com.khatch.projektarbete_vg.book.Book
+import com.khatch.projektarbete_vg.book.BookRepository
+//import com.example.lektion_11_roomdb.databinding.ActivityMainBinding
+//import com.example.lektion_11_roomdb.user.User
+//import com.example.lektion_11_roomdb.user.UserRepository
+import kotlinx.coroutines.Dispatchers
+
+
 /* https://www.googleapis.com/books/v1/volumes?q=fruntimmer */
 
 class MainActivity : AppCompatActivity() {
@@ -31,6 +39,34 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         //setContentView(R.layout.activity_main)
+
+        // setting RoomDB
+        val db = AppDatabase.getInstance(applicationContext)
+        val bookRepository = BookRepository(db, lifecycleScope)
+
+        // INSERT
+        fun insertTheBook(sT:String, pL:String, mT:String, mA:String) {
+            bookRepository.performDatabaseOperation(Dispatchers.IO) {
+                bookRepository.addBook(
+                    Book(sT, pL, mT, mA)
+                )
+            }
+        }
+
+        // FETCH
+        fun fetchTheBook():List<Book> {
+            var booksList:List<Book> = emptyList()
+            bookRepository.performDatabaseOperation(Dispatchers.IO) {
+                booksList = bookRepository.getAllBooks()
+                println("[Inside IO]booksList = $booksList")
+                bookRepository.performDatabaseOperation(Dispatchers.Main) {
+                    println("[Inside Main] bookList = $booksList")
+                }
+            }
+            return booksList
+        }
+
+
 
         // ViewModel's
         val counterSearchesViewModel by viewModels<CounterSearchesViewModel>()
