@@ -3,6 +3,8 @@ plugins {
     id 'org.jetbrains.kotlin.android'
 }
 
+apply plugin: 'kotlin-kapt'
+
 android {
     namespace 'com.khatch.projektarbete_vg'
     compileSdk 33
@@ -51,6 +53,12 @@ dependencies {
     //kapt ("androidx.room:room-compiler:2.5.1")
     implementation ("androidx.room:room-ktx:2.5.1")
     androidTestImplementation ("androidx.room:room-testing:2.5.1")
+    implementation ("androidx.room:room-runtime:2.5.0")
+    androidTestImplementation ("androidx.room:room-testing:2.5.0")
+    // To use Kotlin annotation processing tool (kapt)
+    kapt ("androidx.room:room-compiler:2.5.0")
+    implementation ("androidx.lifecycle:lifecycle-runtime-ktx:2.5.1")
+
 
     implementation 'androidx.core:core-ktx:1.9.0'
     implementation 'androidx.appcompat:appcompat:1.6.1'
