@@ -43,6 +43,11 @@ class MainActivity : AppCompatActivity() {
         // setting RoomDB
         val db = AppDatabase.getInstance(applicationContext)
         val bookRepository = BookRepository(db, lifecycleScope)
+        println(
+            " The path of my-google-books-database.db is:  ${
+                applicationContext.getDatabasePath(/* p0 = */"my-google-books-database.db")
+            }"
+        )
 
         // INSERT
         fun insertTheBook(sT:String, pL:String, mT:String, mA:String) {
@@ -107,8 +112,13 @@ class MainActivity : AppCompatActivity() {
                 print("  Search history : ")
                 for (item in counterSearchesViewModel.uiState.value.searchQueries) {
                     print("  $item  ")
+                    insertTheBook(item,item,item,item) // TODO MUST to vary these params
                 }
                 println()
+                println("<>")
+                println("Fetching Books from RoomDB")
+                println("RoomDB size = "+fetchTheBook().size)
+                println("<>")
                 println("=== END ===")
                 Toast.makeText(this,
                     "{ ${edEnterDesiredBook.text} } has been added to " +
