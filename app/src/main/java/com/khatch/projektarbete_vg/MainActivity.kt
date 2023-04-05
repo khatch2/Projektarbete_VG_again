@@ -93,7 +93,7 @@ class MainActivity : AppCompatActivity() {
         btnBookSearch.setOnClickListener() {
             counterSearchesViewModel.push(element = edEnterDesiredBook.text.toString())
             println("size of counterSearchesViewModel = ${counterSearchesViewModel.uiState.value.searchQueries.size}") // Then to change this line to see the last pushed string on Array
-            for (i in 0..(counterSearchesViewModel.uiState.value.searchQueries.size)) {
+            for (i in 0..((counterSearchesViewModel.uiState.value.searchQueries.size)-1)) {
                 println(
                     "Item retrieved from counterSearchesViewModel is = ${
                         counterSearchesViewModel.uiState.value.searchQueries[i]
