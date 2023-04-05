@@ -44,7 +44,7 @@ dependencies {
     implementation ("com.squareup.retrofit2:retrofit:2.9.0")            // Retrofit
     implementation ("com.squareup.retrofit2:converter-gson:2.9.0")      // GSON
     implementation ("com.github.bumptech.glide:glide:4.15.1")           // GLIDE
-    annotationProcessor ("com.github.bumptech.glide:compiler:4.15.0")   // GLIDE
+    annotationProcessor ('com.github.bumptech.glide:compiler:4.15.1')   // GLIDE
     implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4")
     implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
     implementation ("androidx.navigation:navigation-fragment-ktx:2.5.3")
@@ -53,11 +53,11 @@ dependencies {
     //kapt ("androidx.room:room-compiler:2.5.1")
     implementation ("androidx.room:room-ktx:2.5.1")
     androidTestImplementation ("androidx.room:room-testing:2.5.1")
-    implementation ("androidx.room:room-runtime:2.5.0")
-    androidTestImplementation ("androidx.room:room-testing:2.5.0")
+    implementation ('androidx.room:room-runtime:2.5.1')
+    androidTestImplementation ('androidx.room:room-testing:2.5.1')
     // To use Kotlin annotation processing tool (kapt)
-    kapt ("androidx.room:room-compiler:2.5.0")
-    implementation ("androidx.lifecycle:lifecycle-runtime-ktx:2.5.1")
+    kapt ('androidx.room:room-compiler:2.5.1')
+    implementation ('androidx.lifecycle:lifecycle-runtime-ktx:2.6.1')
 
 
     implementation 'androidx.core:core-ktx:1.9.0'
