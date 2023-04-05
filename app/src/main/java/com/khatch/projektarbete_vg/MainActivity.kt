@@ -128,7 +128,7 @@ class MainActivity : AppCompatActivity() {
                     var mySearchQueries = counterSearchesViewModel.uiState.value.searchQueries
                     var myCounterSearchValue = counterSearchesViewModel.uiState.value.counterSearchesValue
                     for (i in mySearchQueries) {
-                        println("Item from mySearchQueries = $mySearchQueries")
+                        println("Item from mySearchQueries = "+i)
                     }
                     println("myCounterSearchValue = $myCounterSearchValue")
                     }

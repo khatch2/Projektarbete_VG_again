@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:background="@color/beige"
+    >
 
     <TextView
         android:id="@+id/tv_bookFinder"
@@ -39,7 +41,9 @@
         android:text="@string/here_is_googlebooksapi"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        android:background="@color/white"
+        />
 
     <EditText
         android:id="@+id/ed_EnterDesiredBook"
@@ -55,7 +59,8 @@
         android:minHeight="48dp"
         app:layout_constraintEnd_toStartOf="@+id/btn_BookSearch"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_bookFinder" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_bookFinder"
+        android:background="@color/white" />
 
     <Button
         android:id="@+id/btn_BookSearch"
@@ -78,6 +83,7 @@
         android:fontFamily="times"
         android:text="TextView"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@color/white"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
