@@ -10,6 +10,7 @@ import androidx.room.PrimaryKey
 * */
 @Entity("Books")
 data class Book (
+    val searchedWord: String,
     val smallThumbnail:String,
     val previewLink: String,
     val title: String,

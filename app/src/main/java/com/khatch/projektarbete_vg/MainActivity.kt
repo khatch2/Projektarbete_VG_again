@@ -16,13 +16,8 @@ import com.khatch.projektarbete_vg.counterSearches.CounterSearchesViewModel
 import kotlinx.coroutines.launch
 import retrofit2.*
 import retrofit2.converter.gson.GsonConverterFactory
-
-import androidx.lifecycle.lifecycleScope
 import com.khatch.projektarbete_vg.book.Book
 import com.khatch.projektarbete_vg.book.BookRepository
-//import com.example.lektion_11_roomdb.databinding.ActivityMainBinding
-//import com.example.lektion_11_roomdb.user.User
-//import com.example.lektion_11_roomdb.user.UserRepository
 import kotlinx.coroutines.Dispatchers
 
 
@@ -50,10 +45,10 @@ class MainActivity : AppCompatActivity() {
         )
 
         // INSERT
-        fun insertTheBook(sT:String, pL:String, mT:String, mA:String) {
+        fun insertTheBook(sW: String, sT:String, pL:String, mT:String, mA:String) {
             bookRepository.performDatabaseOperation(Dispatchers.IO) {
                 bookRepository.addBook(
-                    Book(sT, pL, mT, mA)
+                    Book(sW, sT, pL, mT, mA)
                 )
             }
         }
@@ -70,8 +65,6 @@ class MainActivity : AppCompatActivity() {
             }
             return booksList
         }
-
-
 
         // ViewModel's
         val counterSearchesViewModel by viewModels<CounterSearchesViewModel>()
@@ -111,8 +104,8 @@ class MainActivity : AppCompatActivity() {
 
                 print("  Search history : ")
                 for (item in counterSearchesViewModel.uiState.value.searchQueries) {
-                    print("  $item  ")
-                    insertTheBook(item,item,item,item) // TODO MUST to vary these params
+                    print("  item = $item  ")
+                    insertTheBook(item,item,item,item, item) // TODO MUST to vary these params
                 }
                 println()
                 println("<>")
@@ -131,7 +124,13 @@ class MainActivity : AppCompatActivity() {
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 counterSearchesViewModel.uiState.collect() {
-
+                    // TODO : MUST to rewrite this part to achieve the Updating UI Elements
+                    var mySearchQueries = counterSearchesViewModel.uiState.value.searchQueries
+                    var myCounterSearchValue = counterSearchesViewModel.uiState.value.counterSearchesValue
+                    for (i in mySearchQueries) {
+                        println("Item from mySearchQueries = $mySearchQueries")
+                    }
+                    println("myCounterSearchValue = $myCounterSearchValue")
                     }
                 }
             }
