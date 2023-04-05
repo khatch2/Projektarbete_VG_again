@@ -108,10 +108,13 @@ class MainActivity : AppCompatActivity() {
                     insertTheBook(item,item,item,item, item) // TODO MUST to vary these params
                 }
                 println()
-                println("<>")
+                println("<===========================>")
                 println("Fetching Books from RoomDB")
-                println("RoomDB size = "+fetchTheBook().size)
-                println("<>")
+                println("RoomDB size = ${fetchTheBook().size}")
+                for (j in fetchTheBook()) {
+                    println("Item \"searchedWord\" from fetchTheBook() is: ${j.searchedWord}")
+                }
+                println("<===========================>")
                 println("=== END ===")
                 Toast.makeText(this,
                     "{ ${edEnterDesiredBook.text} } has been added to " +
