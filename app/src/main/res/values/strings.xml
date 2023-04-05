@@ -3,4 +3,7 @@
     <string name="bokens_hittaren">Bokens Hittaren</string>
     <string name="here_is_googlebooksapi">HERE is GoogleBooksApi</string>
     <string name="this_is_a_smallthumbnail">This is a smallThumbnail</string>
+    <string name="enter_desired_book">Enter desired book?</string>
+    <string name="search">Search</string>
+    <string name="textview">TextView</string>
 </resources>
