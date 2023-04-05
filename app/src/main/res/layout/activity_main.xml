@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
-    android:background="@color/beige"
+
     >
 
     <TextView
@@ -33,6 +33,9 @@
         android:contentDescription="@string/this_is_a_smallthumbnail"
         android:contextClickable="true"
         android:foreground="@drawable/content"
+        android:foregroundTint="@color/purple_500"
+        android:foregroundTintMode="add"
+        android:forceHasOverlappingRendering="true"
         android:tooltipText="Here is an image from Api."
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

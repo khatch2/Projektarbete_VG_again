@@ -91,7 +91,15 @@ class MainActivity : AppCompatActivity() {
         edEnterDesiredBook.setOnClickListener() {}
 
         btnBookSearch.setOnClickListener() {
-            counterSearchesViewModel.push(edEnterDesiredBook.text.toString())
+            counterSearchesViewModel.push(element = edEnterDesiredBook.text.toString())
+            println("size of counterSearchesViewModel = ${counterSearchesViewModel.uiState.value.searchQueries.size}") // Then to change this line to see the last pushed string on Array
+            for (i in 0..(counterSearchesViewModel.uiState.value.searchQueries.size)) {
+                println(
+                    "Item retrieved from counterSearchesViewModel is = ${
+                        counterSearchesViewModel.uiState.value.searchQueries[i]
+                    }"
+                )
+            }
 
             if(counterSearchesViewModel.uiState.value.searchQueries.isNotEmpty()) {
                 // Update UI Elements
@@ -110,12 +118,21 @@ class MainActivity : AppCompatActivity() {
                 println()
                 println("<===========================>")
                 println("Fetching Books from RoomDB")
-                println("RoomDB size = ${fetchTheBook().size}")
-                for (j in fetchTheBook()) {
-                    println("Item \"searchedWord\" from fetchTheBook() is: ${j.searchedWord}")
+                val myFetchedBooks: List<Book> = fetchTheBook()
+                println("RoomDB size = ${myFetchedBooks.size}")
+                for (j_book in myFetchedBooks) { // TODO: it must enter inside ??
+                    println("Item \"searchedWord\" from myFetchedBooks is: ${j_book.searchedWord}")
+                    println("Item \"authors\" from myFetchedBooks is: ${j_book.authors}")
+                    println("Item \"id\" from myFetchedBooks is: ${j_book.id}")
+                    println("Item \"previewLink\" from myFetchedBooks is: ${j_book.previewLink}")
+                    println("Item \"smallThumbnail\" from myFetchedBooks is: ${j_book.smallThumbnail}")
+                    println("Item \"title\" from myFetchedBooks is: ${j_book.title}")
+                    println("Item \"toString()\" from myFetchedBooks is: ${j_book.toString()}")
+
+
                 }
                 println("<===========================>")
-                println("=== END ===")
+                println("=== END Search History ===")
                 Toast.makeText(this,
                     "{ ${edEnterDesiredBook.text} } has been added to " +
                             "the search history successfully. ",

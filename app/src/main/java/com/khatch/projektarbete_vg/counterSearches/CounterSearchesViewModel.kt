@@ -16,7 +16,8 @@ class CounterSearchesViewModel : ViewModel() {
         _state.update { index -> index.copy(counterSearchesValue = index.counterSearchesValue - 1) }
     }
     fun push(element:String) {
-        _state.update { index -> index.copy(searchQueries = index.searchQueries.plus(element)) }
+        _state.update { index -> index.copy(searchQueries = index.searchQueries.plus(element))
+        }
     }
     /*
     fun pop() {
