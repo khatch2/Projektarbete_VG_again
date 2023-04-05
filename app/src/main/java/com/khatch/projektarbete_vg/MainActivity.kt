@@ -126,7 +126,7 @@ class MainActivity : AppCompatActivity() {
                 println("<===========================>")
                 println("Fetching Books from RoomDB")
                 val myFetchedBooks: List<Book> = fetchTheBook()
-                println("RoomDB size = ${myFetchedBooks.size}")
+                println("RoomDB size = ${myFetchedBooks.size}")  // TODO - Fix this after Lunch
                 for (j_book in myFetchedBooks) { // TODO: it must enter inside ??
                     println("Item \"searchedWord\" from myFetchedBooks is: ${j_book.searchedWord}")
                     println("Item \"authors\" from myFetchedBooks is: ${j_book.authors}")
