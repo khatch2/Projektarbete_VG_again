@@ -92,13 +92,10 @@ class MainActivity : AppCompatActivity() {
 
         btnBookSearch.setOnClickListener() {
             counterSearchesViewModel.push(element = edEnterDesiredBook.text.toString())
+            counterSearchesViewModel.add()
             println("size of counterSearchesViewModel = ${counterSearchesViewModel.uiState.value.searchQueries.size}") // Then to change this line to see the last pushed string on Array
-            for (i in 0..((counterSearchesViewModel.uiState.value.searchQueries.size)-1)) {
-                println(
-                    "Item retrieved from counterSearchesViewModel is = ${
-                        counterSearchesViewModel.uiState.value.searchQueries[i]
-                    }"
-                )
+            for(myString in counterSearchesViewModel.uiState.value.searchQueries) {
+                println(" myString = $myString")
             }
 
             if(counterSearchesViewModel.uiState.value.searchQueries.isNotEmpty()) {
@@ -107,14 +104,24 @@ class MainActivity : AppCompatActivity() {
                     counterSearchesViewModel.uiState.value.searchQueries.get(
                         counterSearchesViewModel.uiState.value.searchQueries.size -1
                     ).toString()
-                println("searchQueries are: "+counterSearchesViewModel.uiState.value.searchQueries.toString())
-                println("==== counterSearchesViewModel.uiState.value.searchQueries ====")
-
-                print("  Search history : ")
-                for (item in counterSearchesViewModel.uiState.value.searchQueries) {
-                    print("  item = $item  ")
-                    insertTheBook(item,item,item,item, item) // TODO MUST to vary these params
+                //println("searchQueries are: "+counterSearchesViewModel.uiState.value.searchQueries.toString())
+                print("searchQueries are: ")
+                for (i in counterSearchesViewModel.uiState.value.searchQueries) {
+                    print(i+" , ")
                 }
+                //println("==== counterSearchesViewModel.uiState.value.searchQueries ====")
+
+
+                    insertTheBook(
+                        counterSearchesViewModel.uiState.value.searchQueries[
+                                counterSearchesViewModel.uiState.value.searchQueries.size - 1
+                        ], // Here is searchedWord
+                        counterSearchesViewModel.uiState.value.searchQueries[0], // TODO - Change this line to smallThumbnail
+                        counterSearchesViewModel.uiState.value.searchQueries[0], // TODO - Change this line to previewLink
+                        counterSearchesViewModel.uiState.value.searchQueries[0], // TODO - Change this line to title
+                        counterSearchesViewModel.uiState.value.searchQueries[0], // TODO - Change this line to authors
+                    ) // TODO MUST to vary these params
+
                 println()
                 println("<===========================>")
                 println("Fetching Books from RoomDB")
