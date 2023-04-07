@@ -74,7 +74,7 @@ class MainActivity : AppCompatActivity() {
 
         // ID's
         val tvBookFinder = binding.tvBookFinder
-        val tvGoogleBooksApi = binding.tvGoogleBooksApi // TextView
+        val tvGoogleBooksApiDesc = binding.tvGoogleBooksApiDesc // TextView
         val ivGoogleBooks = binding.ivGoogleBooks    // ImageView
         val edEnterDesiredBook = binding.edEnterDesiredBook
         val btnBookSearch = binding.btnBookSearch
@@ -86,7 +86,7 @@ class MainActivity : AppCompatActivity() {
 
         // OnClick's
         tvBookFinder.setOnClickListener() {}
-        tvGoogleBooksApi.setOnClickListener() {}
+        tvGoogleBooksApiDesc.setOnClickListener() {}
         ivGoogleBooks.setOnClickListener() {}
         edEnterDesiredBook.setOnClickListener() {}
 
@@ -179,8 +179,8 @@ class MainActivity : AppCompatActivity() {
 
                     // Is myBook NOT null?
                     if (myBook != null) {
-                        //tvGoogleBooksApi.text = myBook.get(0).myTitle
-                        tvGoogleBooksApi.text = myBook.myTitle
+                        //tvGoogleBooksApiDesc.text = myBook.get(0).myTitle
+                        tvGoogleBooksApiDesc.text = myBook.myTitle
                         // Load Image
                         Glide.with(binding.root)
                             // .load(myBook.get(0).myImage)

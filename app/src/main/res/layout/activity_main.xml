@@ -12,89 +12,83 @@
         android:id="@+id/tv_bookFinder"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="36dp"
-        android:layout_marginBottom="184dp"
+        android:layout_marginStart="134dp"
+        android:layout_marginTop="22dp"
         android:background="#FEED00"
         android:fontFamily="times"
         android:text="@string/bokens_hittaren"
         android:textColor="@android:color/holo_red_dark"
-        app:layout_constraintBottom_toTopOf="@+id/tv_GoogleBooksApi"
-        app:layout_constraintStart_toStartOf="@+id/tv_GoogleBooksApi" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/iv_GoogleBooks"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="53dp"
+        android:layout_marginTop="236dp"
+        android:layout_marginEnd="52dp"
         android:autofillHints="Descriped_Image_Api"
-        android:background="@color/red"
-        android:backgroundTint="@color/red"
         android:clickable="true"
-        android:contentDescription="@string/this_is_a_smallthumbnail"
+        android:contentDescription="@string/app_name"
         android:contextClickable="true"
-        android:foreground="@drawable/content"
-        android:foregroundTint="@color/purple_500"
-        android:foregroundTintMode="add"
         android:forceHasOverlappingRendering="true"
+        android:foreground="@drawable/content"
+        android:foregroundTintMode="add"
         android:tooltipText="Here is an image from Api."
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_launcher_background" />
 
     <TextView
-        android:id="@+id/tv_GoogleBooksApi"
+        android:id="@+id/tv_GoogleBooksApi_desc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="284dp"
+        android:layout_marginStart="56dp"
+        android:layout_marginTop="200dp"
+        android:background="@color/white"
         android:fontFamily="times"
         android:text="@string/here_is_googlebooksapi"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:background="@color/white"
-        />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/ed_EnterDesiredBook"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="52dp"
-        android:layout_marginEnd="14dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="128dp"
+        android:autofillHints=""
+        android:background="@color/white"
         android:ems="10"
         android:fontFamily="times"
         android:hint="@string/enter_desired_book"
         android:inputType="textPersonName"
         android:minHeight="48dp"
-        app:layout_constraintEnd_toStartOf="@+id/btn_BookSearch"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_bookFinder"
-        android:background="@color/white"
-        android:autofillHints="" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/btn_BookSearch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="3dp"
+        android:layout_marginTop="66dp"
+        android:layout_marginEnd="16dp"
         android:fontFamily="times"
         android:text="@string/search"
         android:textAllCaps="false"
-        app:layout_constraintBaseline_toBaselineOf="@+id/ed_EnterDesiredBook"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/ed_EnterDesiredBook" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tv_CounterSearchesValue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="115dp"
-        android:layout_marginTop="79dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:background="@color/white"
         android:fontFamily="times"
         android:text="@string/textview"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:background="@color/white"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
