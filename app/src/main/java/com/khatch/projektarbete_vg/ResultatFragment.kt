@@ -50,6 +50,6 @@ class ResultatFragment : Fragment() {
         // OnClick
 
         return view
-        
+
     }
 }
