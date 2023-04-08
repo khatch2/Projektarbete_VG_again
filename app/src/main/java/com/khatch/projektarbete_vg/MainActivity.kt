@@ -18,6 +18,7 @@ import retrofit2.*
 import retrofit2.converter.gson.GsonConverterFactory
 import com.khatch.projektarbete_vg.book.Book
 import com.khatch.projektarbete_vg.book.BookRepository
+import com.khatch.projektarbete_vg.databinding.FragmentResultatBinding
 import kotlinx.coroutines.Dispatchers
 
 
@@ -25,14 +26,16 @@ import kotlinx.coroutines.Dispatchers
 
 class MainActivity : AppCompatActivity() {
     /* Initialize ViewBinding */
-    private lateinit var binding:ActivityMainBinding
+    private lateinit var bindingMainActivity:ActivityMainBinding
+    private lateinit var bindingResultatFragment: FragmentResultatBinding
+
     //private var baseUrl = "https://www.googleapis.com/"
     private var querySentence = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         /** Set ViewBinding */
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        bindingMainActivity = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(bindingMainActivity.root)
         //setContentView(R.layout.activity_main)
 
         // setting RoomDB
@@ -73,25 +76,36 @@ class MainActivity : AppCompatActivity() {
 
 
         // ID's
-        val tvBookFinder = binding.tvBookFinder
-        val tvGoogleBooksApiDesc = binding.tvGoogleBooksApiDesc // TextView
-        val ivGoogleBooks = binding.ivGoogleBooks    // ImageView
-        val edEnterDesiredBook = binding.edEnterDesiredBook
-        val btnBookSearch = binding.btnBookSearch
-        val tvCounterSearchesValue = binding.tvCounterSearchesValue
+        /*
+        val tvBookFinder = bindingMainActivity.tvBookFinder
+        val tvGoogleBooksApiDesc = bindingMainActivity.tvGoogleBooksApiDesc // TextView
+        val ivGoogleBooks = bindingMainActivity.ivGoogleBooks    // ImageView
+        val edEnterDesiredBook = bindingMainActivity.edEnterDesiredBook
+        val btnBookSearch = bindingMainActivity.btnBookSearch
+        val tvCounterSearchesValue = bindingMainActivity.tvCounterSearchesValue
+        */
+        val tvCounterSearchesValueResultatFragment = bindingResultatFragment.tvCounterSearchesValueResultatFragment
+        val ivFirstResult = bindingResultatFragment.ivFirstResult
+        val tvFirstResultDesc = bindingResultatFragment.tvFirstResultDesc
+        val ivSecondResult = bindingResultatFragment.ivSecondResult
+        val tvSecondResultDesc = bindingResultatFragment.tvSecondResultDesc
+        val edEnterDesiredBookResultatFragment = bindingResultatFragment.edEnterDesiredBookResultatFragment
+        val btnBookSearchResultatFragment = bindingResultatFragment.btnBookSearchResultatFragment
+        val ivGoogleBooksLillaFruntimmer = bindingResultatFragment.ivGoogleBooksLillaFruntimmer
+        val tvGoogleBooksApiDescResultatFragment = bindingResultatFragment.tvGoogleBooksApiDescResultatFragment
 
-        if (edEnterDesiredBook.text.toString() == "") {
+        if (edEnterDesiredBookResultatFragment.text.toString() == "") {
             querySentence = "fruntimmer"
         }
 
         // OnClick's
-        tvBookFinder.setOnClickListener() {}
-        tvGoogleBooksApiDesc.setOnClickListener() {}
-        ivGoogleBooks.setOnClickListener() {}
-        edEnterDesiredBook.setOnClickListener() {}
-
-        btnBookSearch.setOnClickListener() {
-            counterSearchesViewModel.push(element = edEnterDesiredBook.text.toString())
+        ivFirstResult.setOnClickListener() {}
+        tvFirstResultDesc.setOnClickListener() {}
+        ivSecondResult.setOnClickListener() {}
+        tvSecondResultDesc.setOnClickListener() {}
+        edEnterDesiredBookResultatFragment.setOnClickListener() {}
+        btnBookSearchResultatFragment.setOnClickListener() {
+            counterSearchesViewModel.push(element = edEnterDesiredBookResultatFragment.text.toString())
             counterSearchesViewModel.add()
             println("size of counterSearchesViewModel = ${counterSearchesViewModel.uiState.value.searchQueries.size}") // Then to change this line to see the last pushed string on Array
             for(myString in counterSearchesViewModel.uiState.value.searchQueries) {
@@ -100,7 +114,7 @@ class MainActivity : AppCompatActivity() {
 
             if(counterSearchesViewModel.uiState.value.searchQueries.isNotEmpty()) {
                 // Update UI Elements
-                tvCounterSearchesValue.text =
+                tvCounterSearchesValueResultatFragment.text =
                     counterSearchesViewModel.uiState.value.searchQueries.get(
                         counterSearchesViewModel.uiState.value.searchQueries.size -1
                     ).toString()
@@ -112,15 +126,15 @@ class MainActivity : AppCompatActivity() {
                 //println("==== counterSearchesViewModel.uiState.value.searchQueries ====")
 
 
-                    insertTheBook(
-                        counterSearchesViewModel.uiState.value.searchQueries[
-                                counterSearchesViewModel.uiState.value.searchQueries.size - 1
-                        ], // Here is searchedWord
-                        counterSearchesViewModel.uiState.value.searchQueries[0], // TODO - Change this line to smallThumbnail
-                        counterSearchesViewModel.uiState.value.searchQueries[0], // TODO - Change this line to previewLink
-                        counterSearchesViewModel.uiState.value.searchQueries[0], // TODO - Change this line to title
-                        counterSearchesViewModel.uiState.value.searchQueries[0], // TODO - Change this line to authors
-                    ) // TODO MUST to vary these params
+                insertTheBook(
+                    counterSearchesViewModel.uiState.value.searchQueries[
+                            counterSearchesViewModel.uiState.value.searchQueries.size - 1
+                    ], // Here is searchedWord
+                    counterSearchesViewModel.uiState.value.searchQueries[0], // TODO - Change this line to smallThumbnail
+                    counterSearchesViewModel.uiState.value.searchQueries[0], // TODO - Change this line to previewLink
+                    counterSearchesViewModel.uiState.value.searchQueries[0], // TODO - Change this line to title
+                    counterSearchesViewModel.uiState.value.searchQueries[0], // TODO - Change this line to authors
+                ) // TODO MUST to vary these params
 
                 println()
                 println("<===========================>")
@@ -135,25 +149,25 @@ class MainActivity : AppCompatActivity() {
                     println("Item \"smallThumbnail\" from myFetchedBooks is: ${j_book.smallThumbnail}")
                     println("Item \"title\" from myFetchedBooks is: ${j_book.title}")
                     println("Item \"toString()\" from myFetchedBooks is: ${j_book.toString()}")
-
-
                 }
                 println("<===========================>")
                 println("=== END Search History ===")
                 Toast.makeText(this,
-                    "{ ${edEnterDesiredBook.text} } has been added to " +
+                    "{ ${edEnterDesiredBookResultatFragment.text} } has been added to " +
                             "the search history successfully. ",
                     Toast.LENGTH_LONG).show()
         }
-        tvCounterSearchesValue.setOnClickListener() {}
+        ivGoogleBooksLillaFruntimmer.setOnClickListener() {}
+        tvGoogleBooksApiDescResultatFragment.setOnClickListener() {}
+
 
         // ViewModel LifeCycle
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 counterSearchesViewModel.uiState.collect() {
                     // TODO : MUST to rewrite this part to achieve the Updating UI Elements
-                    var mySearchQueries = counterSearchesViewModel.uiState.value.searchQueries
-                    var myCounterSearchValue = counterSearchesViewModel.uiState.value.counterSearchesValue
+                    val mySearchQueries = counterSearchesViewModel.uiState.value.searchQueries
+                    val myCounterSearchValue = counterSearchesViewModel.uiState.value.counterSearchesValue
                     for (i in mySearchQueries) {
                         println("Item from mySearchQueries = $i")
                     }
@@ -180,17 +194,14 @@ class MainActivity : AppCompatActivity() {
                     // Is myBook NOT null?
                     if (myBook != null) {
                         //tvGoogleBooksApiDesc.text = myBook.get(0).myTitle
-                        tvGoogleBooksApiDesc.text = myBook.myTitle
+                        tvGoogleBooksApiDescResultatFragment.text = myBook.myTitle
                         // Load Image
-                        Glide.with(binding.root)
+                        Glide.with(bindingMainActivity.root)
                             // .load(myBook.get(0).myImage)
                             .load(myBook.myImage)
                             .apply(RequestOptions.overrideOf(450))
-                            .into(ivGoogleBooks)
-
-
+                            .into(ivFirstResult)
                     }
-
                 } else {
                     println("ERROR")
                     println(" errorBody(): "+response.errorBody())
@@ -210,9 +221,7 @@ class MainActivity : AppCompatActivity() {
                 println(" call.isExecuted "+call.isExecuted)
                 println("call.timeout() "+call.timeout().toString())
             }
-
         })
-
     }
 }
 

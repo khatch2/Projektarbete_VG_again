@@ -5,25 +5,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
-    android:background="@color/teal_700"
-
-
-    >
-
+    android:background="@color/teal_700" >
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteX="65dp"
         tools:layout_editor_absoluteY="-53dp">
-
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:orientation="vertical" >
-
-
-
+            android:orientation="vertical">
             <androidx.fragment.app.FragmentContainerView
                 android:id="@+id/fragmentContainerView"
                 android:name="androidx.navigation.fragment.NavHostFragment"
@@ -31,8 +23,9 @@
                 android:layout_height="match_parent"
                 app:defaultNavHost="true"
                 app:navGraph="@navigation/my_nav_graf" />
-            <TextView
-                android:id="@+id/tv_bookFinder"
+
+            <!-- <TextView
+                android:id="@+id/tv_bookFinderAppDescMainActivity"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="134dp"
@@ -42,8 +35,8 @@
                 android:text="@string/bokens_hittaren"
                 android:textColor="@android:color/holo_red_dark"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-            <EditText
+                app:layout_constraintTop_toTopOf="parent" /> -->
+            <!-- <EditText
                 android:id="@+id/ed_EnterDesiredBook"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -57,8 +50,8 @@
                 android:inputType="textPersonName"
                 android:minHeight="48dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-            <TextView
+                app:layout_constraintTop_toTopOf="parent" /> -->
+            <!-- <TextView
                 android:id="@+id/tv_GoogleBooksApi_desc"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -68,9 +61,9 @@
                 android:fontFamily="times"
                 android:text="@string/here_is_googlebooksapi"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent" /> -->
 
-             <Button
+            <!-- <Button
                 android:id="@+id/btn_BookSearch"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -80,8 +73,8 @@
                 android:text="@string/search"
                 android:textAllCaps="false"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-            <TextView
+                app:layout_constraintTop_toTopOf="parent" /> -->
+            <!-- <TextView
                 android:id="@+id/tv_CounterSearchesValue"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -91,9 +84,9 @@
                 android:fontFamily="times"
                 android:text="@string/textview"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent" /> -->
 
-            <ImageView
+            <!-- <ImageView
                 android:id="@+id/iv_GoogleBooks"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -109,7 +102,7 @@
                 android:tooltipText="Here is an image from Api."
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/ic_launcher_background" />
+                app:srcCompat="@drawable/ic_launcher_background" /> -->
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 

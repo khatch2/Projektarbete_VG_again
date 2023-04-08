@@ -6,57 +6,139 @@
     android:layout_height="match_parent"
     tools:context=".ResultatFragment"
     android:background="@color/purple_200">
-
-    <androidx.appcompat.widget.LinearLayoutCompat
-
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center"
-        android:orientation="vertical">
+        android:contentDescription="@string/description_of_scrollview_inside_fragment">
 
-        <ImageView
-            android:id="@+id/iv_FirstResult"
-            android:layout_width="wrap_content"
+        <androidx.appcompat.widget.LinearLayoutCompat
+
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:contentDescription="@string/bilden_resultat"
-            tools:src="@tools:sample/avatars" />
+            android:gravity="center"
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/tv_First_Result_Desc"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="times"
-            android:text="@string/first_result_description"
-            android:textAlignment="center"
-            android:textColor="#4E342E"
-            android:textStyle="bold" />
+            <TextView
+                android:id="@+id/tv_CounterSearchesValueResultatFragment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="times"
+                android:text="@string/countersearchesvalue_resultatfragment"
+                android:textAlignment="center"
+                android:textColor="#4E342E"
+                android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/tv_Separation_Many_Tildas"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="times"
-            android:text="@string/many_tilda"
-            android:textAlignment="center"
-            android:textColor="#4E342E"
-            android:textStyle="bold" />
 
-        <ImageView
-            android:id="@+id/iv_SecondResult"
-            android:layout_width="200dp"
-            android:layout_height="200dp"
-            android:contentDescription="@string/annan_bild"
-            tools:src="@tools:sample/backgrounds/scenic" />
+            <ImageView
+                android:id="@+id/iv_FirstResult"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/bilden_resultat"
+                android:visibility="invisible"
+                tools:src="@tools:sample/avatars" />
 
-        <TextView
-            android:id="@+id/tv_Second_Result_Desc"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="times"
-            android:text="Second result description"
-            android:textAlignment="center"
-            android:textColor="#4E342E"
-            android:textStyle="bold" />
-    </androidx.appcompat.widget.LinearLayoutCompat>
+            <TextView
+                android:id="@+id/tv_First_Result_Desc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="times"
+                android:text="@string/first_result_description"
+                android:textAlignment="center"
+                android:textColor="#4E342E"
+                android:textStyle="bold" />
 
+            <TextView
+                android:id="@+id/tv_Separation_Many_Tildas_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="times"
+                android:text="@string/many_tilda"
+                android:textAlignment="center"
+                android:textColor="#4E342E"
+                android:textStyle="bold"
+                />
+
+            <ImageView
+                android:id="@+id/iv_SecondResult"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:contentDescription="@string/annan_bild"
+                tools:src="@tools:sample/backgrounds/scenic"
+                android:visibility="invisible"/>
+
+            <TextView
+                android:id="@+id/tv_Second_Result_Desc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="times"
+                android:text="@string/second_result_description"
+                android:textAlignment="center"
+                android:textColor="#4E342E"
+                android:textStyle="bold" />
+            <EditText
+                android:id="@+id/ed_EnterDesiredBookResultatFragment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="128dp"
+                android:autofillHints=""
+                android:background="@color/white"
+                android:ems="10"
+                android:fontFamily="times"
+                android:hint="@string/enter_desired_book"
+                android:inputType="textPersonName"
+                android:minHeight="48dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+            <Button
+                android:id="@+id/btn_BookSearchResultatFragment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="66dp"
+                android:layout_marginEnd="16dp"
+                android:fontFamily="times"
+                android:text="@string/search"
+                android:textAllCaps="false"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+            <ImageView
+                android:id="@+id/iv_GoogleBooksLillaFruntimmer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="236dp"
+                android:layout_marginEnd="52dp"
+                android:autofillHints="Described_Image_Api"
+                android:clickable="true"
+                android:contentDescription="@string/app_name"
+                android:contextClickable="true"
+                android:forceHasOverlappingRendering="true"
+                android:foreground="@drawable/content"
+                android:foregroundTintMode="add"
+                android:tooltipText="Here is an image from Api."
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_launcher_background"
+                android:visibility="visible"/>
+            <TextView
+                android:id="@+id/tv_Separation_Many_Tildas_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="times"
+                android:text="@string/many_tilda"
+                android:textAlignment="center"
+                android:textColor="#4E342E"
+                android:textStyle="bold"
+                />
+            <TextView
+                android:id="@+id/tv_GoogleBooksApi_descResultatFragment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:fontFamily="times"
+                android:text="@string/here_is_googlebooksapi"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+    </ScrollView>
 </FrameLayout>

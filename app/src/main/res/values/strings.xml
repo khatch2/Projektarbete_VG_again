@@ -14,4 +14,7 @@
     <string name="todo">TODO</string>
     <string name="annan_bild">annan bild</string>
     <string name="first_result_description">First result description</string>
+    <string name="description_of_scrollview_inside_fragment">Description of scrollview inside fragment</string>
+    <string name="second_result_description">Second result description</string>
+    <string name="countersearchesvalue_resultatfragment">CounterSearchesValue ResultatFragment</string>
 </resources>
