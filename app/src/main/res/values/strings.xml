@@ -6,4 +6,12 @@
     <string name="enter_desired_book">Enter desired book?</string>
     <string name="search">Search</string>
     <string name="textview">TextView</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="bilden_resultat">Bilden_resultat</string>
+    <string name="many_tilda">~~~~~~~~~~~~~~~~~~~~~~~~~~</string>
+    <string name="hejsan_t_m_fragmentet">Hejsan töm fragmentet</string>
+    <string name="todo">TODO</string>
+    <string name="annan_bild">annan bild</string>
+    <string name="first_result_description">First result description</string>
 </resources>
