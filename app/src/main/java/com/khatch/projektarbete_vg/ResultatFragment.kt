@@ -58,6 +58,12 @@ class ResultatFragment : Fragment() {
             )
         )
 
+        // retrofit
+        val retrofit: Retrofit = Retrofit.Builder()
+            .baseUrl("https://www.googleapis.com/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+        println(" retrofit = $retrofit")
 
         // INSERT
         fun insertTheBook(sW: String, sT: String, pL: String, mT: String, mA: String) {
