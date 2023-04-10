@@ -65,6 +65,21 @@ class ResultatFragment : Fragment() {
             .build()
         println(" retrofit = $retrofit")
 
+        val desiredBook: Call<GoogleBooks> =
+            retrofit.create<IGoogleBooks>().getDesiredBook(querySentence)
+        println("desiredBook = $desiredBook")
+
+        desiredBook.enqueue(object : Callback<GoogleBooks>{
+            override fun onResponse(call: Call<GoogleBooks>, response: Response<GoogleBooks>) {
+                TODO(reason = "Not yet implemented")
+            }
+
+            override fun onFailure(call: Call<GoogleBooks>, t: Throwable) {
+                TODO(reason = "Not yet implemented")
+            }
+        })
+
+
         // INSERT
         fun insertTheBook(sW: String, sT: String, pL: String, mT: String, mA: String) {
             bookRepository.performDatabaseOperation(Dispatchers.IO) {
