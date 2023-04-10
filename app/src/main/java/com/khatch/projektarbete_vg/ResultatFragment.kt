@@ -39,6 +39,7 @@ class ResultatFragment : Fragment() {
     //private var baseUrl = "https://www.googleapis.com/"
     private var querySentence = ""
 
+    //@SuppressLint("UnsafeRepeatOnLifecycleDetector")
     @SuppressLint("UnsafeRepeatOnLifecycleDetector")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -58,6 +59,28 @@ class ResultatFragment : Fragment() {
             )
         )
 
+        // ViewModel
+        val counterSearchesViewModel: CounterSearchesViewModel by viewModels<CounterSearchesViewModel>()
+        //val counterViewModel by viewModels <CounterViewModel>()
+        println(" counterSearchesViewModel = $counterSearchesViewModel ")
+
+        // ID:s
+        val tvCounterSearchesValueResultatFragment: TextView =
+            bindingResultatFragment.tvCounterSearchesValueResultatFragment
+        val ivFirstResult: ImageView = bindingResultatFragment.ivFirstResult
+        val tvFirstResultDesc: TextView = bindingResultatFragment.tvFirstResultDesc
+        val ivSecondResult: ImageView = bindingResultatFragment.ivSecondResult
+        val tvSecondResultDesc: TextView = bindingResultatFragment.tvSecondResultDesc
+        val edEnterDesiredBookResultatFragment: EditText =
+            bindingResultatFragment.edEnterDesiredBookResultatFragment
+        val btnBookSearchResultatFragment: Button =
+            bindingResultatFragment.btnBookSearchResultatFragment
+        val ivGoogleBooksLillaFruntimmer: ImageView =
+            bindingResultatFragment.ivGoogleBooksLillaFruntimmer
+        val tvGoogleBooksApiDescResultatFragment: TextView =
+            bindingResultatFragment.tvGoogleBooksApiDescResultatFragment
+
+
         // retrofit
         val retrofit: Retrofit = Retrofit.Builder()
             .baseUrl("https://www.googleapis.com/")
@@ -71,13 +94,26 @@ class ResultatFragment : Fragment() {
 
         desiredBook.enqueue(object : Callback<GoogleBooks>{
             override fun onResponse(call: Call<GoogleBooks>, response: Response<GoogleBooks>) {
-                TODO(reason = "Not yet implemented")
+                // Status code 200 - 300
+                if(response.isSuccessful){
+                    var myBook: GoogleBooks? = response.body()
+
+                    // Is myBook NOT null?
+                    if (myBook != null) {
+                        println(" myBook = " + myBook)
+                        Glide.with(bindingResultatFragment.root)
+                            .load(myBook.myImage)
+                            .apply(RequestOptions.overrideOf(450))
+                            .into(ivFirstResult)
+                    }
+                }
             }
 
             override fun onFailure(call: Call<GoogleBooks>, t: Throwable) {
                 // ERROR + 404 Not found
                 // ERROR + No Internet Connection
                 println(" ERROR  = ${t.message}")
+                println(t.printStackTrace())
                 println(t.localizedMessage)
                 println(t.fillInStackTrace())
 
@@ -113,26 +149,6 @@ class ResultatFragment : Fragment() {
         }
 
 
-        // ViewModel
-        val counterSearchesViewModel: CounterSearchesViewModel by viewModels<CounterSearchesViewModel>()
-        //val counterViewModel by viewModels <CounterViewModel>()
-        println(" counterSearchesViewModel = $counterSearchesViewModel ")
-
-        // ID:s
-        val tvCounterSearchesValueResultatFragment: TextView =
-            bindingResultatFragment.tvCounterSearchesValueResultatFragment
-        val ivFirstResult: ImageView = bindingResultatFragment.ivFirstResult
-        val tvFirstResultDesc: TextView = bindingResultatFragment.tvFirstResultDesc
-        val ivSecondResult: ImageView = bindingResultatFragment.ivSecondResult
-        val tvSecondResultDesc: TextView = bindingResultatFragment.tvSecondResultDesc
-        val edEnterDesiredBookResultatFragment: EditText =
-            bindingResultatFragment.edEnterDesiredBookResultatFragment
-        val btnBookSearchResultatFragment: Button =
-            bindingResultatFragment.btnBookSearchResultatFragment
-        val ivGoogleBooksLillaFruntimmer: ImageView =
-            bindingResultatFragment.ivGoogleBooksLillaFruntimmer
-        val tvGoogleBooksApiDescResultatFragment: TextView =
-            bindingResultatFragment.tvGoogleBooksApiDescResultatFragment
 
         // Logic goes here
         if (edEnterDesiredBookResultatFragment.text.toString() == "") {
@@ -159,8 +175,8 @@ class ResultatFragment : Fragment() {
                     ).toString()
                 //println("searchQueries are: "+counterSearchesViewModel.uiState.value.searchQueries.toString())
                 print("searchQueries are: ")
-                for (i in counterSearchesViewModel.uiState.value.searchQueries) {
-                    print("$i , ")
+                for (i_String in counterSearchesViewModel.uiState.value.searchQueries) {
+                    print("$i_String , ")
                 }
                 //println("==== counterSearchesViewModel.uiState.value.searchQueries ====")
 
