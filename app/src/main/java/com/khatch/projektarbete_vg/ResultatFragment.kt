@@ -75,7 +75,17 @@ class ResultatFragment : Fragment() {
             }
 
             override fun onFailure(call: Call<GoogleBooks>, t: Throwable) {
-                TODO(reason = "Not yet implemented")
+                // ERROR + 404 Not found
+                // ERROR + No Internet Connection
+                println(" ERROR  = ${t.message}")
+                println(t.localizedMessage)
+                println(t.fillInStackTrace())
+
+                println()
+                println(" call.request() ${call.request()}")
+                println(" call.toString() $call")
+                println(" call.isExecuted ${call.isExecuted}")
+                println("call.timeout() ${call.timeout()}")
             }
         })
 
