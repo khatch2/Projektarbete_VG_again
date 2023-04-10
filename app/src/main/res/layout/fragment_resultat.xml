@@ -34,7 +34,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/bilden_resultat"
-                android:visibility="invisible"
+                android:visibility="visible"
                 tools:src="@tools:sample/avatars" />
 
             <TextView
@@ -64,7 +64,7 @@
                 android:layout_height="200dp"
                 android:contentDescription="@string/annan_bild"
                 tools:src="@tools:sample/backgrounds/scenic"
-                android:visibility="invisible"/>
+                android:visibility="visible"/>
 
             <TextView
                 android:id="@+id/tv_Second_Result_Desc"
@@ -118,7 +118,8 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/ic_launcher_background"
-                android:visibility="visible"/>
+                android:visibility="visible"
+                 />
             <TextView
                 android:id="@+id/tv_Separation_Many_Tildas_2"
                 android:layout_width="wrap_content"
