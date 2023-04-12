@@ -62,7 +62,7 @@ class ResultatFragment : Fragment() {
         // ViewModel
         val counterSearchesViewModel: CounterSearchesViewModel by viewModels<CounterSearchesViewModel>()
         //val counterViewModel by viewModels <CounterViewModel>()
-        println(" counterSearchesViewModel = $counterSearchesViewModel ")
+        //println(" counterSearchesViewModel = $counterSearchesViewModel ")
 
         // ID:s
         val tvCounterSearchesValueResultatFragment: TextView =
@@ -81,81 +81,14 @@ class ResultatFragment : Fragment() {
             bindingResultatFragment.tvGoogleBooksApiDescResultatFragment
 
 
-        // retrofit
-        val retrofit: Retrofit = Retrofit.Builder()
-            .baseUrl("https://www.googleapis.com/")
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-        println(" retrofit = " + retrofit)
-
-        val desiredBook: Call<GoogleBooks> =
-            retrofit.create<IGoogleBooks>().getDesiredBook(querySentence)
-        println("desiredBook = " + desiredBook)
-
-        desiredBook.enqueue(object : Callback<GoogleBooks>{
-            override fun onResponse(call: Call<GoogleBooks>, response: Response<GoogleBooks>) {
-
-                // Status code 200 - 300
-                if(response.isSuccessful){
-                    var myBook: GoogleBooks? = response.body()
-
-                    // Is myBook NOT null?
-                    if (myBook != null) {
-                        println(" myBook = " + myBook)
-                        Glide.with(bindingResultatFragment.root)
-                            .load(myBook.myImage)
-                            .apply(RequestOptions.overrideOf(450))
-                            .into(ivFirstResult)
-                    }
-                } else {
-                    println(" ERROR"+" HTTP code = " + response.code())
-                }
-            }
-
-            override fun onFailure(call: Call<GoogleBooks>, t: Throwable) {
-                // ERROR + 404 Not found
-                // ERROR + No Internet Connection
-                println(" ERROR  = ${t.message}")
-                println(t.printStackTrace())
-                println(t.localizedMessage)
-                println(t.fillInStackTrace())
-
-                println()
-                println(" call.request() ${call.request()}")
-                println(" call.toString() $call")
-                println(" call.isExecuted ${call.isExecuted}")
-                println("call.timeout() ${call.timeout()}")
-            }
-        })
-
-
-        // INSERT
-        fun insertTheBook(sW: String, sT: String, pL: String, mT: String, mA: String) {
-            bookRepository.performDatabaseOperation(Dispatchers.IO) {
-                bookRepository.addBook(
-                    Book(sW, sT, pL, mT, mA)
-                )
-            }
-        }
-
-        // FETCH
-        fun fetchTheBook(): List<Book> {
-            var booksList: List<Book> = emptyList()
-            bookRepository.performDatabaseOperation(Dispatchers.IO) {
-                booksList = bookRepository.getAllBooks()
-                println("[Inside IO]booksList = $booksList")
-                bookRepository.performDatabaseOperation(Dispatchers.Main) {
-                    println("[Inside Main] bookList = $booksList")
-                }
-            }
-            return booksList
-        }
-
-
 
         // Logic goes here
         if (edEnterDesiredBookResultatFragment.text.toString() == "") {
             querySentence = "fruntimmer"
+        } else {
+            querySentence = edEnterDesiredBookResultatFragment.text.toString()
+            //println(edEnterDesiredBookResultatFragment.text)
+            //println(edEnterDesiredBookResultatFragment.text.toString())
         }
         ivFirstResult.setOnClickListener() {}
         tvFirstResultDesc.setOnClickListener() {}
@@ -163,6 +96,93 @@ class ResultatFragment : Fragment() {
         tvSecondResultDesc.setOnClickListener() {}
         edEnterDesiredBookResultatFragment.setOnClickListener() {}
         btnBookSearchResultatFragment.setOnClickListener() {
+
+            if (edEnterDesiredBookResultatFragment.text.toString() == "") {
+                querySentence = "fruntimmer"
+            } else {
+                querySentence = edEnterDesiredBookResultatFragment.text.toString()
+                //println(edEnterDesiredBookResultatFragment.text)
+                //println(edEnterDesiredBookResultatFragment.text.toString())
+            }
+
+            // retrofit
+            val retrofit: Retrofit = Retrofit.Builder()
+                .baseUrl("https://www.googleapis.com/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build()
+            println(" retrofit = " + retrofit)
+
+            val desiredBook: Call<GoogleBooks> =
+                retrofit.create<IGoogleBooks>().getDesiredBook(querySentence)
+            println("desiredBook = " + desiredBook)
+            println("desiredBook.isExecuted " + desiredBook.isExecuted)
+            println("desiredBook.isCanceled " + desiredBook.isCanceled)
+            var lookInsideReqest = desiredBook.request()
+            println("lookInsideReqest.url() " + lookInsideReqest.url())
+
+            desiredBook.enqueue(object : Callback<GoogleBooks>{
+                override fun onResponse(call: Call<GoogleBooks>, response: Response<GoogleBooks>) {
+
+                    // Status code 200 - 300
+                    if(response.isSuccessful){
+                        println("Successfull HTTP code is = " + response.code())
+                        //println("response.message() is = " + response.message())
+                        var myBook: GoogleBooks? = response.body()
+
+                        // Is myBook NOT null?
+                        if (myBook != null) {
+                            println(" myBook = " + myBook)
+                            Glide.with(bindingResultatFragment.root)
+                                .load(myBook.myImage)
+                                .apply(RequestOptions.overrideOf(450))
+                                .into(ivFirstResult)
+                        }
+                    } else {
+                        println(" ERROR myBook was null !!! "+" HTTP code = " + response.code()) // DONE: FIXED http_error was = 400
+                    }
+                }
+
+                override fun onFailure(call: Call<GoogleBooks>, t: Throwable) {
+                    // ERROR + 404 Not found
+                    // ERROR + No Internet Connection
+                    println(" ERROR  = ${t.message}")
+                    //println(t.printStackTrace().toString())
+                    println(t.localizedMessage)
+                    println(t.fillInStackTrace())
+
+                    println()
+                    println(" call.request() ${call.request()}")
+                    println(" call.toString() $call")
+                    println(" call.isExecuted ${call.isExecuted}")
+                    println("call.timeout() ${call.timeout()}")
+                }
+            })
+
+
+            // INSERT
+            fun insertTheBook(sW: String, sT: String, pL: String, mT: String, mA: String) {
+                bookRepository.performDatabaseOperation(Dispatchers.IO) {
+                    bookRepository.addBook(
+                        Book(sW, sT, pL, mT, mA)
+                    )
+                }
+            }
+
+            // FETCH
+            fun fetchTheBook(): List<Book> {
+                var booksList: List<Book> = emptyList()
+                bookRepository.performDatabaseOperation(Dispatchers.IO) {
+                    booksList = bookRepository.getAllBooks()
+                    println("[Inside IO]booksList = $booksList")
+                    bookRepository.performDatabaseOperation(Dispatchers.Main) {
+                        println("[Inside Main] bookList = $booksList")
+                    }
+                }
+                return booksList
+            }
+
+
+
             counterSearchesViewModel.push(element = edEnterDesiredBookResultatFragment.text.toString())
             counterSearchesViewModel.add()
             println("size of counterSearchesViewModel = ${counterSearchesViewModel.uiState.value.searchQueries.size}") // Then to change this line to see the last pushed string on Array
