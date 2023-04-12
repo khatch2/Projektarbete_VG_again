@@ -87,8 +87,8 @@ class ResultatFragment : Fragment() {
             querySentence = "fruntimmer"
         } else {
             querySentence = edEnterDesiredBookResultatFragment.text.toString()
-            //println(edEnterDesiredBookResultatFragment.text)
-            //println(edEnterDesiredBookResultatFragment.text.toString())
+            println(edEnterDesiredBookResultatFragment.text)
+            println(edEnterDesiredBookResultatFragment.text.toString())
         }
         ivFirstResult.setOnClickListener() {}
         tvFirstResultDesc.setOnClickListener() {}
@@ -117,8 +117,8 @@ class ResultatFragment : Fragment() {
             println("desiredBook = " + desiredBook)
             println("desiredBook.isExecuted " + desiredBook.isExecuted)
             println("desiredBook.isCanceled " + desiredBook.isCanceled)
-            var lookInsideReqest = desiredBook.request()
-            println("lookInsideReqest.url() " + lookInsideReqest.url())
+            //var lookInsideReqest = desiredBook.request()
+            //println("lookInsideReqest.url() " + lookInsideReqest.url())
 
             desiredBook.enqueue(object : Callback<GoogleBooks>{
                 override fun onResponse(call: Call<GoogleBooks>, response: Response<GoogleBooks>) {
@@ -132,10 +132,13 @@ class ResultatFragment : Fragment() {
                         // Is myBook NOT null?
                         if (myBook != null) {
                             println(" myBook = " + myBook)
+
+                            /*
                             Glide.with(bindingResultatFragment.root)
                                 .load(myBook.myImage)
                                 .apply(RequestOptions.overrideOf(450))
                                 .into(ivFirstResult)
+                            */
                         }
                     } else {
                         println(" ERROR myBook was null !!! "+" HTTP code = " + response.code()) // DONE: FIXED http_error was = 400
