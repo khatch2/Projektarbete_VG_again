@@ -86,14 +86,15 @@ class ResultatFragment : Fragment() {
             .baseUrl("https://www.googleapis.com/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
-        println(" retrofit = $retrofit")
+        println(" retrofit = " + retrofit)
 
         val desiredBook: Call<GoogleBooks> =
             retrofit.create<IGoogleBooks>().getDesiredBook(querySentence)
-        println("desiredBook = $desiredBook")
+        println("desiredBook = " + desiredBook)
 
         desiredBook.enqueue(object : Callback<GoogleBooks>{
             override fun onResponse(call: Call<GoogleBooks>, response: Response<GoogleBooks>) {
+
                 // Status code 200 - 300
                 if(response.isSuccessful){
                     var myBook: GoogleBooks? = response.body()
@@ -106,6 +107,8 @@ class ResultatFragment : Fragment() {
                             .apply(RequestOptions.overrideOf(450))
                             .into(ivFirstResult)
                     }
+                } else {
+                    println(" ERROR"+" HTTP code = " + response.code())
                 }
             }
 
