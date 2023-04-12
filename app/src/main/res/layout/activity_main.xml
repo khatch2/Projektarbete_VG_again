@@ -20,90 +20,10 @@
             <androidx.fragment.app.FragmentContainerView
                 android:id="@+id/fragmentContainerView"
                 android:name="androidx.navigation.fragment.NavHostFragment"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 app:defaultNavHost="true"
                 app:navGraph="@navigation/my_nav_graf" />
-
-            <!-- <TextView
-                android:id="@+id/tv_bookFinderAppDescMainActivity"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="134dp"
-                android:layout_marginTop="22dp"
-                android:background="#FEED00"
-                android:fontFamily="times"
-                android:text="@string/bokens_hittaren"
-                android:textColor="@android:color/holo_red_dark"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" /> -->
-            <!-- <EditText
-                android:id="@+id/ed_EnterDesiredBook"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="40dp"
-                android:layout_marginTop="128dp"
-                android:autofillHints=""
-                android:background="@color/white"
-                android:ems="10"
-                android:fontFamily="times"
-                android:hint="@string/enter_desired_book"
-                android:inputType="textPersonName"
-                android:minHeight="48dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" /> -->
-            <!-- <TextView
-                android:id="@+id/tv_GoogleBooksApi_desc"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="56dp"
-                android:layout_marginTop="200dp"
-                android:background="@color/white"
-                android:fontFamily="times"
-                android:text="@string/here_is_googlebooksapi"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" /> -->
-
-            <!-- <Button
-                android:id="@+id/btn_BookSearch"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="66dp"
-                android:layout_marginEnd="16dp"
-                android:fontFamily="times"
-                android:text="@string/search"
-                android:textAllCaps="false"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" /> -->
-            <!-- <TextView
-                android:id="@+id/tv_CounterSearchesValue"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:background="@color/white"
-                android:fontFamily="times"
-                android:text="@string/textview"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" /> -->
-
-            <!-- <ImageView
-                android:id="@+id/iv_GoogleBooks"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="236dp"
-                android:layout_marginEnd="52dp"
-                android:autofillHints="Descriped_Image_Api"
-                android:clickable="true"
-                android:contentDescription="@string/app_name"
-                android:contextClickable="true"
-                android:forceHasOverlappingRendering="true"
-                android:foreground="@drawable/content"
-                android:foregroundTintMode="add"
-                android:tooltipText="Here is an image from Api."
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/ic_launcher_background" /> -->
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 

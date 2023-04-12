@@ -35,7 +35,9 @@
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/bilden_resultat"
                 android:visibility="visible"
-                tools:src="@tools:sample/avatars" />
+                tools:src="@tools:sample/avatars"
+                android:background="@drawable/borders"
+                />
 
             <TextView
                 android:id="@+id/tv_First_Result_Desc"
@@ -64,7 +66,9 @@
                 android:layout_height="200dp"
                 android:contentDescription="@string/annan_bild"
                 tools:src="@tools:sample/backgrounds/scenic"
-                android:visibility="visible"/>
+                android:visibility="visible"
+                android:background="@drawable/borders"
+                />
 
             <TextView
                 android:id="@+id/tv_Second_Result_Desc"
