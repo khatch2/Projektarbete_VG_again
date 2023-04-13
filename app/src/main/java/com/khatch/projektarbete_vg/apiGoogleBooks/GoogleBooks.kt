@@ -8,7 +8,8 @@ data class GoogleBooks(
 
     @SerializedName("kind") val myKind : String = ""
     @SerializedName("totalItems") val myTotalItems : Int = 0
-    @SerializedName("items") val myItems : Array<String> = TODO()
+    @SerializedName("items") val myItems : Array<Items> = emptyArray<Items>()
+
     override fun toString(): String {
         return "GoogleBooks(internalQuery='$internalQuery', myKind='$myKind', myTotalItems=$myTotalItems, myItems=${myItems.contentToString()})"
     }
