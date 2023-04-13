@@ -14,6 +14,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.khatch.projektarbete_vg.apiGoogleBooks.GoogleBookItem
 import com.khatch.projektarbete_vg.apiGoogleBooks.GoogleBooks
 import com.khatch.projektarbete_vg.apiGoogleBooks.GoogleBooksResponse
 import com.khatch.projektarbete_vg.apiGoogleBooks.IGoogleBooks
@@ -135,13 +136,18 @@ class ResultatFragment : Fragment() {
                         // Is myBook NOT null?
                         if (myBook != null) {
                             println(" myBook = " + myBook)
+                            for(item: GoogleBookItem in myBook.items) {
+                                println("(item of GoogleBookItem).volumeinfo.imageLinks = "
+                                        + item.volumeInfo.imageLinks)
 
-                            /*
+                            }
+
+
                             Glide.with(bindingResultatFragment.root)
-                                .load(myBook.myImage)
+                                .load(myBook.items.first().volumeInfo.imageLinks)
                                 .apply(RequestOptions.overrideOf(450))
-                                .into(ivFirstResult)
-                            */
+                                .into(ivSecondResult)
+
                         }
                     } else {
                         println(" ERROR myBook was null !!! "+" HTTP code = " + response.code()) // DONE: FIXED http_error was = 400
