@@ -15,6 +15,7 @@ import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.khatch.projektarbete_vg.apiGoogleBooks.GoogleBooks
+import com.khatch.projektarbete_vg.apiGoogleBooks.GoogleBooksResponse
 import com.khatch.projektarbete_vg.apiGoogleBooks.IGoogleBooks
 import com.khatch.projektarbete_vg.book.Book
 import com.khatch.projektarbete_vg.book.BookRepository
@@ -112,7 +113,7 @@ class ResultatFragment : Fragment() {
                 .build()
             println(" retrofit = " + retrofit)
 
-            val desiredBook: Call<GoogleBooks> =
+            val desiredBook: Call<GoogleBooksResponse> =
                 retrofit.create<IGoogleBooks>().getDesiredBook(querySentence)
             println("desiredBook = " + desiredBook)
             println("desiredBook.isExecuted " + desiredBook.isExecuted)
@@ -120,14 +121,16 @@ class ResultatFragment : Fragment() {
             //var lookInsideReqest = desiredBook.request()
             //println("lookInsideReqest.url() " + lookInsideReqest.url())
 
-            desiredBook.enqueue(object : Callback<GoogleBooks>{
-                override fun onResponse(call: Call<GoogleBooks>, response: Response<GoogleBooks>) {
-
+            desiredBook.enqueue(object : Callback<GoogleBooksResponse> {
+                override fun onResponse(
+                    call: Call<GoogleBooksResponse>,
+                    response: Response<GoogleBooksResponse>
+                ) {
                     // Status code 200 - 300
                     if(response.isSuccessful){
                         println("Successfull HTTP code is = " + response.code())
                         //println("response.message() is = " + response.message())
-                        var myBook: GoogleBooks? = response.body()
+                        var myBook: GoogleBooksResponse? = response.body()
 
                         // Is myBook NOT null?
                         if (myBook != null) {
@@ -145,7 +148,7 @@ class ResultatFragment : Fragment() {
                     }
                 }
 
-                override fun onFailure(call: Call<GoogleBooks>, t: Throwable) {
+                override fun onFailure(call: Call<GoogleBooksResponse>, t: Throwable) {
                     // ERROR + 404 Not found
                     // ERROR + No Internet Connection
                     println(" ERROR  = ${t.message}")
@@ -160,6 +163,7 @@ class ResultatFragment : Fragment() {
                     println("call.timeout() ${call.timeout()}")
                 }
             })
+
 
 
             // INSERT

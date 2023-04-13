@@ -7,11 +7,16 @@ class Items {
     @SerializedName("id")  val inside_id: String = ""
     @SerializedName("etag")  val inside_etag: String = ""
     @SerializedName("selfLink")  val inside_selfLink: String = ""
-    @SerializedName("volumeInfo")  val inside_volumeInfo: Array<VolumeInfo> = emptyArray<VolumeInfo>()
+    @SerializedName("volumeInfo")  val inside_volumeInfo: VolumeInfo = TODO()
+    override fun toString(): String {
+        return "Items(inside_kind='$inside_kind', inside_id='$inside_id', inside_etag='$inside_etag', inside_selfLink='$inside_selfLink', inside_volumeInfo=$inside_volumeInfo)"
+    }
 
+    /*
     override fun toString(): String {
         return "Items(inside_kind='$inside_kind', inside_id='$inside_id', inside_etag='$inside_etag', inside_selfLink='$inside_selfLink', inside_volumeInfo=${inside_volumeInfo.contentToString()})"
     }
+    */
 
 
 }

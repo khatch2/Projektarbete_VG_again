@@ -1,6 +1,7 @@
 package com.khatch.projektarbete_vg.apiGoogleBooks
 
 import com.google.gson.annotations.SerializedName
+
 data class GoogleBooks(
     var internalQuery: String = "karl"
     ) {
@@ -11,7 +12,9 @@ data class GoogleBooks(
     @SerializedName("items") val myItems : Array<Items> = emptyArray<Items>()
 
     override fun toString(): String {
-        return "GoogleBooks(internalQuery='$internalQuery', myKind='$myKind', myTotalItems=$myTotalItems, myItems=${myItems.contentToString()})"
+        return "GoogleBooks(internalQuery='$internalQuery'," +
+                " myKind='$myKind', myTotalItems=$myTotalItems," +
+                " myItems=${myItems.contentToString()})"
     }
 
     /*
