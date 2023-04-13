@@ -40,14 +40,16 @@
                 />
 
             <TextView
-                android:id="@+id/tv_First_Result_Desc"
+                android:id="@+id/tv_First_Result_Title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="times"
-                android:text="@string/first_result_description"
+                android:text="First result title"
                 android:textAlignment="center"
                 android:textColor="#4E342E"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+
+                 />
 
             <TextView
                 android:id="@+id/tv_Separation_Many_Tildas_1"
@@ -62,8 +64,8 @@
 
             <ImageView
                 android:id="@+id/iv_SecondResult"
-                android:layout_width="200dp"
-                android:layout_height="200dp"
+                android:layout_width="200sp"
+                android:layout_height="200sp"
                 android:contentDescription="@string/annan_bild"
                 tools:src="@tools:sample/backgrounds/scenic"
                 android:visibility="visible"
@@ -71,13 +73,14 @@
                 />
 
             <TextView
-                android:id="@+id/tv_Second_Result_Desc"
+                android:id="@+id/tv_First_Result_Description"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="times"
                 android:text="@string/second_result_description"
                 android:textAlignment="center"
                 android:textColor="#4E342E"
+                android:textSize="10sp"
                 android:textStyle="bold" />
             <EditText
                 android:id="@+id/ed_EnterDesiredBookResultatFragment"

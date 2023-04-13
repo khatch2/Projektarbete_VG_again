@@ -56,7 +56,7 @@ class ResultatFragment : Fragment() {
         //val db: AppDatabase = AppDatabase.getInstance(applicationContext)
         val bookRepository = BookRepository(db, lifecycleScope)
         println(
-            " The path of my-google-books-database.db is:  " + requireContext().getDatabasePath(/* name = */
+            " The path of my-google-books-database.db is:  " + requireContext().getDatabasePath(/* p0 = */
                 "my-google-books-database.db"
             )
         )
@@ -70,9 +70,9 @@ class ResultatFragment : Fragment() {
         val tvCounterSearchesValueResultatFragment: TextView =
             bindingResultatFragment.tvCounterSearchesValueResultatFragment
         val ivFirstResult: ImageView = bindingResultatFragment.ivFirstResult
-        val tvFirstResultDesc: TextView = bindingResultatFragment.tvFirstResultDesc
+        val tvFirstResultTitle: TextView = bindingResultatFragment.tvFirstResultTitle
         val ivSecondResult: ImageView = bindingResultatFragment.ivSecondResult
-        val tvSecondResultDesc: TextView = bindingResultatFragment.tvSecondResultDesc
+        val tvFirstResultDescription: TextView = bindingResultatFragment.tvFirstResultDescription
         val edEnterDesiredBookResultatFragment: EditText =
             bindingResultatFragment.edEnterDesiredBookResultatFragment
         val btnBookSearchResultatFragment: Button =
@@ -93,9 +93,9 @@ class ResultatFragment : Fragment() {
             println(edEnterDesiredBookResultatFragment.text.toString())
         }
         ivFirstResult.setOnClickListener() {}
-        tvFirstResultDesc.setOnClickListener() {}
+        tvFirstResultTitle.setOnClickListener() {}
         ivSecondResult.setOnClickListener() {}
-        tvSecondResultDesc.setOnClickListener() {}
+        tvFirstResultDescription.setOnClickListener() {}
         edEnterDesiredBookResultatFragment.setOnClickListener() {}
         btnBookSearchResultatFragment.setOnClickListener() {
 
@@ -141,11 +141,13 @@ class ResultatFragment : Fragment() {
                                         + item.volumeInfo.imageLinks)
 
                             }
+                            tvFirstResultTitle.text = myBook.items.first().volumeInfo.title
+                            tvFirstResultDescription.text = myBook.items.first().volumeInfo.description
 
 
                             Glide.with(bindingResultatFragment.root)
                                 .load(myBook.items.first().volumeInfo.imageLinks)
-                                .apply(RequestOptions.overrideOf(450))
+                                /* .apply(RequestOptions.overrideOf(450)) */
                                 .into(ivSecondResult)
 
                         }
