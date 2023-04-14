@@ -198,7 +198,7 @@ class ResultatFragment : Fragment() {
                                         counterSearchesViewModel.uiState.value.searchQueries.size - 1
                                 ], // Here is searchedWord
                                 myBook.items.first().volumeInfo.title,
-                                myBook.items.first().volumeInfo.authors.toString(),
+                                myBook.items.first().volumeInfo.authors,
                                 myBook.items.first().volumeInfo.publishedDate.toString(),
                                 myBook.items.first().volumeInfo.description.toString(),
                                 myBook.items.first().volumeInfo.imageLinks?.smallThumbnail.toString(),
