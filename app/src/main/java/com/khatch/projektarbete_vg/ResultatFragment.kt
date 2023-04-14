@@ -240,7 +240,7 @@ class ResultatFragment : Fragment() {
 
             if (counterSearchesViewModel.uiState.value.searchQueries.isNotEmpty()) {
                 // Update UI Elements
-                tvCounterSearchesValueResultatFragment.text =
+                tvCounterSearchesValueResultatFragment.text = " Last counterSearchesValue = " +
                     counterSearchesViewModel.uiState.value.searchQueries.get(
                         counterSearchesViewModel.uiState.value.searchQueries.size - 1
                     ).toString()

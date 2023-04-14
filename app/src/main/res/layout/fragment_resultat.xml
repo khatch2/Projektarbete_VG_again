@@ -28,7 +28,8 @@
                 android:text="@string/countersearchesvalue_resultatfragment"
                 android:textAlignment="center"
                 android:textColor="#4E342E"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:textSize="8sp"/>
 
 
             <ImageView
