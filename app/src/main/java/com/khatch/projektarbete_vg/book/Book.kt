@@ -8,13 +8,15 @@ import androidx.room.PrimaryKey
 * @PrimaryKey(autogenerate = true) <-- Automatically increment ID
 * @ColumInfo("") <-- Specify your own column name
 * */
-@Entity("Books")
+@Entity(tableName = "Books")
 data class Book (
-    val searchedWord: String,
-    val smallThumbnail:String,
-    val previewLink: String,
-    val title: String,
-    val authors: String
+    var searchedWord: String,
+    var title: String? = null,
+    var authors: String? = null,
+    var publishedDate: String? = null,
+    var description: String? = null,
+    var smallThumbnail: String? = null,
+    var thumbnail: String? = null
     ) {
         @PrimaryKey(autoGenerate = true)
         var id: Long? = null

@@ -109,6 +109,34 @@ class ResultatFragment : Fragment() {
                 //println(edEnterDesiredBookResultatFragment.text.toString())
             }
 
+
+            // Declaration of INSERT
+            fun insertTheBook(searchedWord: String, title: String, authors: String,
+                              publishedDate: String, description: String, smallThumbnail: String,
+                              thumbnail: String) {
+                bookRepository.performDatabaseOperation(Dispatchers.IO) {
+                    bookRepository.addBook(
+                        Book(searchedWord, title, authors, publishedDate,
+                            description, smallThumbnail, thumbnail)
+
+
+                    )
+                }
+            }
+
+            // Declaration of FETCH
+            fun fetchTheBook(): List<Book> {
+                var booksList: List<Book> = emptyList()
+                bookRepository.performDatabaseOperation(Dispatchers.IO) {
+                    booksList = bookRepository.getAllBooks()
+                    println("[Inside IO]booksList = $booksList")
+                    bookRepository.performDatabaseOperation(Dispatchers.Main) {
+                        println("[Inside Main] bookList = $booksList")
+                    }
+                }
+                return booksList
+            }
+
             // retrofit
             val retrofit: Retrofit = Retrofit.Builder()
                 .baseUrl("https://www.googleapis.com/")
@@ -165,6 +193,18 @@ class ResultatFragment : Fragment() {
                                  .apply(RequestOptions.overrideOf(450))
                                 .into(ivFirstResult)
 
+                            insertTheBook(
+                                counterSearchesViewModel.uiState.value.searchQueries[
+                                        counterSearchesViewModel.uiState.value.searchQueries.size - 1
+                                ], // Here is searchedWord
+                                myBook.items.first().volumeInfo.title,
+                                myBook.items.first().volumeInfo.authors.toString(),
+                                myBook.items.first().volumeInfo.publishedDate.toString(),
+                                myBook.items.first().volumeInfo.description.toString(),
+                                myBook.items.first().volumeInfo.imageLinks?.smallThumbnail.toString(),
+                                myBook.items.first().volumeInfo.imageLinks?.thumbnail.toString()
+                            )
+
                         }
                     } else {
                         println(" ERROR myBook was null !!! "+" HTTP code = " + response.code()) // DONE: FIXED http_error was = 400
@@ -189,28 +229,6 @@ class ResultatFragment : Fragment() {
 
 
 
-            // INSERT
-            fun insertTheBook(sW: String, sT: String, pL: String, mT: String, mA: String) {
-                bookRepository.performDatabaseOperation(Dispatchers.IO) {
-                    bookRepository.addBook(
-                        Book(sW, sT, pL, mT, mA)
-                    )
-                }
-            }
-
-            // FETCH
-            fun fetchTheBook(): List<Book> {
-                var booksList: List<Book> = emptyList()
-                bookRepository.performDatabaseOperation(Dispatchers.IO) {
-                    booksList = bookRepository.getAllBooks()
-                    println("[Inside IO]booksList = $booksList")
-                    bookRepository.performDatabaseOperation(Dispatchers.Main) {
-                        println("[Inside Main] bookList = $booksList")
-                    }
-                }
-                return booksList
-            }
-
 
 
             counterSearchesViewModel.push(element = edEnterDesiredBookResultatFragment.text.toString())
@@ -234,15 +252,7 @@ class ResultatFragment : Fragment() {
                 //println("==== counterSearchesViewModel.uiState.value.searchQueries ====")
 
 
-                insertTheBook(
-                    counterSearchesViewModel.uiState.value.searchQueries[
-                            counterSearchesViewModel.uiState.value.searchQueries.size - 1
-                    ], // Here is searchedWord
-                    counterSearchesViewModel.uiState.value.searchQueries[0], // TODO - Change this line to smallThumbnail
-                    counterSearchesViewModel.uiState.value.searchQueries[0], // TODO - Change this line to previewLink
-                    counterSearchesViewModel.uiState.value.searchQueries[0], // TODO - Change this line to title
-                    counterSearchesViewModel.uiState.value.searchQueries[0], // TODO - Change this line to authors
-                ) // TODO MUST to vary these params
+
 
                 println()
                 println("<===========================>")
@@ -253,7 +263,6 @@ class ResultatFragment : Fragment() {
                     println("Item \"searchedWord\" from myFetchedBooks is: ${j_book.searchedWord}")
                     println("Item \"authors\" from myFetchedBooks is: ${j_book.authors}")
                     println("Item \"id\" from myFetchedBooks is: ${j_book.id}")
-                    println("Item \"previewLink\" from myFetchedBooks is: ${j_book.previewLink}")
                     println("Item \"smallThumbnail\" from myFetchedBooks is: ${j_book.smallThumbnail}")
                     println("Item \"title\" from myFetchedBooks is: ${j_book.title}")
                     println("Item \"toString()\" from myFetchedBooks is: ${j_book.toString()}")
