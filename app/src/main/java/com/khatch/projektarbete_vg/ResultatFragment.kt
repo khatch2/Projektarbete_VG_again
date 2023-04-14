@@ -11,11 +11,9 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.khatch.projektarbete_vg.apiGoogleBooks.GoogleBookItem
-import com.khatch.projektarbete_vg.apiGoogleBooks.GoogleBooks
 import com.khatch.projektarbete_vg.apiGoogleBooks.GoogleBooksResponse
 import com.khatch.projektarbete_vg.apiGoogleBooks.IGoogleBooks
 import com.khatch.projektarbete_vg.book.Book
@@ -81,7 +79,9 @@ class ResultatFragment : Fragment() {
             bindingResultatFragment.ivGoogleBooksLillaFruntimmer
         val tvGoogleBooksApiDescResultatFragment: TextView =
             bindingResultatFragment.tvGoogleBooksApiDescResultatFragment
-        var ivFox = bindingResultatFragment.ivFox
+        var tvSecondResultTitle = bindingResultatFragment.tvSecondResultTitle
+        var tvSecondResultDescription = bindingResultatFragment.tvSecondResultDescription
+        //var ivFox = bindingResultatFragment.ivFox
 
 
 
@@ -98,7 +98,9 @@ class ResultatFragment : Fragment() {
         ivSecondResult.setOnClickListener() {}
         tvFirstResultDescription.setOnClickListener() {}
         edEnterDesiredBookResultatFragment.setOnClickListener() {}
-        ivFox.setOnClickListener() {}
+        tvSecondResultTitle.setOnClickListener() {}
+        tvSecondResultDescription.setOnClickListener() {}
+        //ivFox.setOnClickListener() {}
         btnBookSearchResultatFragment.setOnClickListener() {
 
             if (edEnterDesiredBookResultatFragment.text.toString() == "") {
@@ -111,12 +113,13 @@ class ResultatFragment : Fragment() {
 
 
             // Declaration of INSERT
-            fun insertTheBook(searchedWord: String, title: String, authors: String,
-                              publishedDate: String, description: String, smallThumbnail: String,
-                              thumbnail: String) {
+            fun insertTheBook(
+                searchedWord: String, title: String, authors: List<String>,
+                publishedDate: String, description: String, smallThumbnail: String,
+                thumbnail: String) {
                 bookRepository.performDatabaseOperation(Dispatchers.IO) {
                     bookRepository.addBook(
-                        Book(searchedWord, title, authors, publishedDate,
+                        Book(searchedWord, title, authors.toString(), publishedDate,
                             description, smallThumbnail, thumbnail)
 
 
@@ -175,23 +178,25 @@ class ResultatFragment : Fragment() {
                             tvFirstResultDescription.text = myBook.items.first().volumeInfo.description
                             val firstImage = myBook.items.first().volumeInfo.imageLinks?.smallThumbnail
                             println("firstImage = " + firstImage)
-                            var resultString = firstImage?.drop(4)
-                            resultString = "https" + resultString
-                            println("resultString = " + resultString)
-                            //val firstImageString: String = firstImage.toString()
-                            //println("firstImageString =  " + firstImageString)
-                            /*
+                            var resultString1 = firstImage?.drop(4)
+                            resultString1 = "https" + resultString1
+                            println("resultString1 = " + resultString1)
                             Glide.with(bindingResultatFragment.root)
-                                /* .load("https://books.google.com/books/content?id=l-OzCkpXtA4C&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api */
-                                .load(resString)
-                                .into(ivFox)
-                            */
-
-
-                            Glide.with(bindingResultatFragment.root)
-                                .load(resultString)
+                                .load(resultString1)
                                  .apply(RequestOptions.overrideOf(450))
                                 .into(ivFirstResult)
+
+                            tvSecondResultTitle.text = myBook.items[1].volumeInfo.title
+                            tvSecondResultDescription.text = myBook.items[1].volumeInfo.description
+                            var secondImage = myBook.items[1].volumeInfo.imageLinks?.smallThumbnail
+                            println("secondImage = " + secondImage)
+                            var resultString2 = secondImage?.drop(4)
+                            resultString2 = "https" + resultString2
+                            println("resultString2 = " + resultString2)
+                            Glide.with(bindingResultatFragment.root)
+                                .load(resultString2)
+                                .apply(RequestOptions.overrideOf(450))
+                                .into(ivSecondResult)
 
                             insertTheBook(
                                 counterSearchesViewModel.uiState.value.searchQueries[

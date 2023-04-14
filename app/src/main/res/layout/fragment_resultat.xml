@@ -21,6 +21,16 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/tv_Separation_Many_Tildas_0"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="times"
+                android:text="@string/many_tilda"
+                android:textAlignment="center"
+                android:textColor="#4E342E"
+                android:textStyle="bold"
+                />
+            <TextView
                 android:id="@+id/tv_CounterSearchesValueResultatFragment"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -53,6 +63,16 @@
                 android:textStyle="bold"
 
                  />
+            <TextView
+                android:id="@+id/tv_First_Result_Description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="times"
+                android:text="First result description"
+                android:textAlignment="center"
+                android:textColor="#4E342E"
+                android:textSize="10sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/tv_Separation_Many_Tildas_1"
@@ -74,9 +94,20 @@
                 android:visibility="visible"
                 android:background="@drawable/borders"
                 />
+            <TextView
+                android:id="@+id/tv_Second_Result_Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="times"
+                android:text="Second result title"
+                android:textAlignment="center"
+                android:textColor="#4E342E"
+                android:textStyle="bold"
+
+                />
 
             <TextView
-                android:id="@+id/tv_First_Result_Description"
+                android:id="@+id/tv_Second_Result_Description"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="times"
@@ -85,6 +116,16 @@
                 android:textColor="#4E342E"
                 android:textSize="10sp"
                 android:textStyle="bold" />
+            <TextView
+                android:id="@+id/tv_Separation_Many_Tildas_1_5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="times"
+                android:text="@string/many_tilda"
+                android:textAlignment="center"
+                android:textColor="#4E342E"
+                android:textStyle="bold"
+                />
             <EditText
                 android:id="@+id/ed_EnterDesiredBookResultatFragment"
                 android:layout_width="wrap_content"
@@ -111,6 +152,16 @@
                 android:textAllCaps="false"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+            <TextView
+                android:id="@+id/tv_Separation_Many_Tildas_4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="times"
+                android:text="@string/many_tilda"
+                android:textAlignment="center"
+                android:textColor="#4E342E"
+                android:textStyle="bold"
+                />
             <ImageView
                 android:id="@+id/iv_GoogleBooksLillaFruntimmer"
                 android:layout_width="wrap_content"
@@ -167,6 +218,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 tools:src="@tools:sample/avatars" />
+            <TextView
+                android:id="@+id/tv_Separation_Many_Tildas_5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="times"
+                android:text="@string/many_tilda"
+                android:textAlignment="center"
+                android:textColor="#4E342E"
+                android:textStyle="bold"
+                />
 
         </androidx.appcompat.widget.LinearLayoutCompat>
     </ScrollView>
