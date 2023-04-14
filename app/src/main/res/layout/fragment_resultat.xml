@@ -5,7 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ResultatFragment"
-    android:background="@color/purple_200">
+    android:background="@color/purple_200"
+    >
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -146,6 +148,24 @@
                 android:text="@string/here_is_googlebooksapi"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_Separation_Many_Tildas_3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="times"
+                android:text="@string/many_tilda"
+                android:textAlignment="center"
+                android:textColor="#4E342E"
+                android:textStyle="bold"
+                />
+
+
+            <ImageView
+                android:id="@+id/iv_fox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:src="@tools:sample/avatars" />
 
         </androidx.appcompat.widget.LinearLayoutCompat>
     </ScrollView>

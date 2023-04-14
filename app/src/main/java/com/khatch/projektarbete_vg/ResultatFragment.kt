@@ -81,6 +81,7 @@ class ResultatFragment : Fragment() {
             bindingResultatFragment.ivGoogleBooksLillaFruntimmer
         val tvGoogleBooksApiDescResultatFragment: TextView =
             bindingResultatFragment.tvGoogleBooksApiDescResultatFragment
+        var ivFox = bindingResultatFragment.ivFox
 
 
 
@@ -97,6 +98,7 @@ class ResultatFragment : Fragment() {
         ivSecondResult.setOnClickListener() {}
         tvFirstResultDescription.setOnClickListener() {}
         edEnterDesiredBookResultatFragment.setOnClickListener() {}
+        ivFox.setOnClickListener() {}
         btnBookSearchResultatFragment.setOnClickListener() {
 
             if (edEnterDesiredBookResultatFragment.text.toString() == "") {
@@ -143,12 +145,25 @@ class ResultatFragment : Fragment() {
                             }
                             tvFirstResultTitle.text = myBook.items.first().volumeInfo.title
                             tvFirstResultDescription.text = myBook.items.first().volumeInfo.description
+                            val firstImage = myBook.items.first().volumeInfo.imageLinks?.smallThumbnail
+                            println("firstImage = " + firstImage)
+                            var resultString = firstImage?.drop(4)
+                            resultString = "https" + resultString
+                            println("resultString = " + resultString)
+                            //val firstImageString: String = firstImage.toString()
+                            //println("firstImageString =  " + firstImageString)
+                            /*
+                            Glide.with(bindingResultatFragment.root)
+                                /* .load("https://books.google.com/books/content?id=l-OzCkpXtA4C&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api */
+                                .load(resString)
+                                .into(ivFox)
+                            */
 
 
                             Glide.with(bindingResultatFragment.root)
-                                .load(myBook.items.first().volumeInfo.imageLinks)
-                                /* .apply(RequestOptions.overrideOf(450)) */
-                                .into(ivSecondResult)
+                                .load(resultString)
+                                 .apply(RequestOptions.overrideOf(450))
+                                .into(ivFirstResult)
 
                         }
                     } else {
