@@ -114,17 +114,29 @@ class ResultatFragment : Fragment() {
 
             // Declaration of INSERT
             fun insertTheBook(
-                searchedWord: String, title: String, authors: List<String>,
+                searchedWord: String, title: String, authors: List<String>?,
                 publishedDate: String, description: String, smallThumbnail: String,
                 thumbnail: String) {
-                bookRepository.performDatabaseOperation(Dispatchers.IO) {
-                    bookRepository.addBook(
-                        Book(searchedWord, title, authors.toString(), publishedDate,
-                            description, smallThumbnail, thumbnail)
+                if (authors != null) {
+                    bookRepository.performDatabaseOperation(Dispatchers.IO) {
+                        bookRepository.addBook(
+                            Book(searchedWord, title, authors.first(), publishedDate,
+                                description, smallThumbnail, thumbnail)
 
 
-                    )
+                        )
+                    }
+                } else {
+                    bookRepository.performDatabaseOperation(Dispatchers.IO) {
+                        bookRepository.addBook(
+                            Book(searchedWord, title, "isEmpty", publishedDate,
+                                description, smallThumbnail, thumbnail)
+
+
+                        )
+                    }
                 }
+
             }
 
             // Declaration of FETCH
