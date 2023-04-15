@@ -162,6 +162,14 @@
                 android:textColor="#4E342E"
                 android:textStyle="bold"
                 />
+            <Button
+                android:id="@+id/btn_viewDatabase"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="View the database"
+                android:textAllCaps="false"
+                android:fontFamily="times"
+                 />
             <ImageView
                 android:id="@+id/iv_GoogleBooksLillaFruntimmer"
                 android:layout_width="wrap_content"
@@ -228,6 +236,8 @@
                 android:textColor="#4E342E"
                 android:textStyle="bold"
                 />
+
+
 
         </androidx.appcompat.widget.LinearLayoutCompat>
     </ScrollView>

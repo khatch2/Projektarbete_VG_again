@@ -81,6 +81,7 @@ class ResultatFragment : Fragment() {
             bindingResultatFragment.tvGoogleBooksApiDescResultatFragment
         var tvSecondResultTitle = bindingResultatFragment.tvSecondResultTitle
         var tvSecondResultDescription = bindingResultatFragment.tvSecondResultDescription
+        var btnViewDatabase = bindingResultatFragment.btnViewDatabase
         //var ivFox = bindingResultatFragment.ivFox
 
 
@@ -100,6 +101,9 @@ class ResultatFragment : Fragment() {
         edEnterDesiredBookResultatFragment.setOnClickListener() {}
         tvSecondResultTitle.setOnClickListener() {}
         tvSecondResultDescription.setOnClickListener() {}
+        btnViewDatabase.setOnClickListener() {      // TODO : Go to an another Fragment of interact with the database
+
+        }
         //ivFox.setOnClickListener() {}
         btnBookSearchResultatFragment.setOnClickListener() {
 
