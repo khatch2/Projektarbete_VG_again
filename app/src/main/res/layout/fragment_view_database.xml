@@ -1,35 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ls"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ViewDatabaseFragment"
-    android:background="@color/aqua" >
+    android:background="@color/aqua"
+    tools:context=".ViewDatabaseFragment">
+
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+        android:layout_height="match_parent">
+
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="@string/hello_blank_fragment"
+                android:text="@string/hello_viewdatabasefragment"
                 android:textColor="#00695C" />
+
             <Button
                 android:id="@+id/btn_viewDatabaseFragmentToResultatFragment"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="@color/white"
                 android:fontFamily="times"
                 android:text="@string/to_resultat_fragment"
-                android:background="@color/white"
-                android:textAllCaps="false" />
+                android:textAllCaps="false"
+                android:textColor="#757575" />
+
+            <ListView
+                android:id="@+id/listView_UsersListFragment"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <TextView
+                android:id="@+id/tv_CounterValueFragment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="tvCounterValueFragment TEXT" />
 
 
         </androidx.appcompat.widget.LinearLayoutCompat>
     </ScrollView>
-
 
 
 </FrameLayout>

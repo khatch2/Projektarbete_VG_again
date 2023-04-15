@@ -18,4 +18,5 @@
     <string name="second_result_description">Second result description</string>
     <string name="countersearchesvalue_resultatfragment">CounterSearchesValue ResultatFragment</string>
     <string name="to_resultat_fragment">To Resultat Fragment</string>
+    <string name="hello_viewdatabasefragment">Hello ViewDatabaseFragment</string>
 </resources>
