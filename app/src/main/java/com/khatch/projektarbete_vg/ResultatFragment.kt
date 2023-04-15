@@ -35,8 +35,6 @@ class ResultatFragment : Fragment() {
 
     }
 
-    //private lateinit var bindingResultatFragment: FragmentResultatBinding
-
     //private var baseUrl = "https://www.googleapis.com/"
     private var querySentence = ""
 
@@ -80,11 +78,10 @@ class ResultatFragment : Fragment() {
             bindingResultatFragment.ivGoogleBooksLillaFruntimmer
         val tvGoogleBooksApiDescResultatFragment: TextView =
             bindingResultatFragment.tvGoogleBooksApiDescResultatFragment
-        var tvSecondResultTitle = bindingResultatFragment.tvSecondResultTitle
-        var tvSecondResultDescription = bindingResultatFragment.tvSecondResultDescription
-        var btnViewDatabase = bindingResultatFragment.btnViewDatabase
+        val tvSecondResultTitle = bindingResultatFragment.tvSecondResultTitle
+        val tvSecondResultDescription = bindingResultatFragment.tvSecondResultDescription
+        val btnViewDatabase = bindingResultatFragment.btnViewDatabase
         //var ivFox = bindingResultatFragment.ivFox
-
 
 
         // Logic goes here
@@ -102,7 +99,7 @@ class ResultatFragment : Fragment() {
         edEnterDesiredBookResultatFragment.setOnClickListener() {}
         tvSecondResultTitle.setOnClickListener() {}
         tvSecondResultDescription.setOnClickListener() {}
-        btnViewDatabase.setOnClickListener() {      // TODO : Go to an another Fragment of interact with the database
+        btnViewDatabase.setOnClickListener() {      // DONE : Go to an another Fragment of interact with the database
             println(" btnViewDatabase eas clicked. ")
             Navigation.findNavController(returnedViewResultatFragment).navigate(
                 R.id.action_resultatFragment_to_viewDatabaseFragment
@@ -127,8 +124,6 @@ class ResultatFragment : Fragment() {
                         bookRepository.addBook(
                             Book(searchedWord, title, authors.first(), publishedDate,
                                 description, smallThumbnail, thumbnail)
-
-
                         )
                     }
                 } else {
@@ -136,8 +131,6 @@ class ResultatFragment : Fragment() {
                         bookRepository.addBook(
                             Book(searchedWord, title, "isEmpty", publishedDate,
                                 description, smallThumbnail, thumbnail)
-
-
                         )
                     }
                 }
@@ -169,8 +162,6 @@ class ResultatFragment : Fragment() {
             println("desiredBook = " + desiredBook)
             println("desiredBook.isExecuted " + desiredBook.isExecuted)
             println("desiredBook.isCanceled " + desiredBook.isCanceled)
-            //var lookInsideReqest = desiredBook.request()
-            //println("lookInsideReqest.url() " + lookInsideReqest.url())
 
             desiredBook.enqueue(object : Callback<GoogleBooksResponse> {
                 override fun onResponse(
@@ -189,6 +180,10 @@ class ResultatFragment : Fragment() {
                             for(item: GoogleBookItem in myBook.items) {
                                 println("(item of GoogleBookItem).volumeinfo.imageLinks = "
                                         + item.volumeInfo.imageLinks)
+                                // Trying to add title into ArrayAdapter ?
+                                usersFragmentArrayList.add(
+                                    myBook.items.first().volumeInfo.title.toString()
+                                )
 
                             }
                             tvFirstResultTitle.text = myBook.items.first().volumeInfo.title
