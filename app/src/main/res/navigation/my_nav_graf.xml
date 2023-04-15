@@ -14,10 +14,22 @@
         <action
             android:id="@+id/action_resultatFragment_to_mainActivity"
             app:destination="@id/mainActivity" />
+        <action
+            android:id="@+id/action_resultatFragment_to_viewDatabaseFragment"
+            app:destination="@id/viewDatabaseFragment" />
     </fragment>
     <activity
         android:id="@+id/mainActivity"
         android:name="com.khatch.projektarbete_vg.MainActivity"
         android:label="activity_main"
         tools:layout="@layout/activity_main" />
+    <fragment
+        android:id="@+id/viewDatabaseFragment"
+        android:name="com.khatch.projektarbete_vg.ViewDatabaseFragment"
+        android:label="fragment_view_database"
+        tools:layout="@layout/fragment_view_database" >
+        <action
+            android:id="@+id/action_viewDatabaseFragment_to_resultatFragment"
+            app:destination="@id/resultatFragment" />
+    </fragment>
 </navigation>

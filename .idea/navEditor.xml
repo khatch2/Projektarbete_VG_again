@@ -29,6 +29,27 @@
                             <option name="y" value="70" />
                           </Point>
                         </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="action_resultatFragment_to_mainActivity">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
+                  <entry key="viewDatabaseFragment">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="-536" />
+                            <option name="y" value="54" />
+                          </Point>
+                        </option>
                       </LayoutPositions>
                     </value>
                   </entry>

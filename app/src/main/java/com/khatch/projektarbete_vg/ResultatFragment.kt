@@ -11,6 +11,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.Navigation
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.khatch.projektarbete_vg.apiGoogleBooks.GoogleBookItem
@@ -47,7 +48,7 @@ class ResultatFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         bindingResultatFragment = FragmentResultatBinding.inflate(layoutInflater, container, false)
-        val returnedViewFrameLayout: FrameLayout = bindingResultatFragment.root
+        val returnedViewResultatFragment: FrameLayout = bindingResultatFragment.root
 
         // setting RoomDB
         val db: AppDatabase = AppDatabase.getInstance(this@ResultatFragment.requireContext())
@@ -102,7 +103,10 @@ class ResultatFragment : Fragment() {
         tvSecondResultTitle.setOnClickListener() {}
         tvSecondResultDescription.setOnClickListener() {}
         btnViewDatabase.setOnClickListener() {      // TODO : Go to an another Fragment of interact with the database
-
+            println(" btnViewDatabase eas clicked. ")
+            Navigation.findNavController(returnedViewResultatFragment).navigate(
+                R.id.action_resultatFragment_to_viewDatabaseFragment
+            )
         }
         //ivFox.setOnClickListener() {}
         btnBookSearchResultatFragment.setOnClickListener() {
@@ -111,10 +115,7 @@ class ResultatFragment : Fragment() {
                 querySentence = "fruntimmer"
             } else {
                 querySentence = edEnterDesiredBookResultatFragment.text.toString()
-                //println(edEnterDesiredBookResultatFragment.text)
-                //println(edEnterDesiredBookResultatFragment.text.toString())
             }
-
 
             // Declaration of INSERT
             fun insertTheBook(
@@ -324,7 +325,7 @@ class ResultatFragment : Fragment() {
             }
         }
 
-        return returnedViewFrameLayout
+        return returnedViewResultatFragment
     }
 
 

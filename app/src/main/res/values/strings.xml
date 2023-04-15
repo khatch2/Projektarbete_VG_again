@@ -17,4 +17,5 @@
     <string name="description_of_scrollview_inside_fragment">Description of scrollview inside fragment</string>
     <string name="second_result_description">Second result description</string>
     <string name="countersearchesvalue_resultatfragment">CounterSearchesValue ResultatFragment</string>
+    <string name="to_resultat_fragment">To Resultat Fragment</string>
 </resources>
