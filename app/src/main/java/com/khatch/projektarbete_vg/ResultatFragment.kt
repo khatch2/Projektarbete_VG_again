@@ -99,12 +99,7 @@ class ResultatFragment : Fragment() {
         edEnterDesiredBookResultatFragment.setOnClickListener() {}
         tvSecondResultTitle.setOnClickListener() {}
         tvSecondResultDescription.setOnClickListener() {}
-        btnViewDatabase.setOnClickListener() {      // DONE : Go to an another Fragment of interact with the database
-            println(" btnViewDatabase eas clicked. ")
-            Navigation.findNavController(returnedViewResultatFragment).navigate(
-                R.id.action_resultatFragment_to_viewDatabaseFragment
-            )
-        }
+
         //ivFox.setOnClickListener() {}
         btnBookSearchResultatFragment.setOnClickListener() {
 
@@ -147,7 +142,22 @@ class ResultatFragment : Fragment() {
                         println("[Inside Main] bookList = $booksList")
                     }
                 }
+                usersFragmentArrayList.clear()
+                for (j: Book in booksList) {
+                    usersFragmentArrayList.add(
+                        j.title.toString()
+                    )
+                }
                 return booksList
+            }
+
+            // OnClick special variant
+            btnViewDatabase.setOnClickListener() {      // DONE : Go to an another Fragment of interact with the database
+                println(" btnViewDatabase eas clicked. ")
+                var retFetched: List<Book> = fetchTheBook()
+                Navigation.findNavController(returnedViewResultatFragment).navigate(
+                    R.id.action_resultatFragment_to_viewDatabaseFragment
+                )
             }
 
             // retrofit
@@ -173,6 +183,14 @@ class ResultatFragment : Fragment() {
                         println("Successfull HTTP code is = " + response.code())
                         //println("response.message() is = " + response.message())
                         var myBook: GoogleBooksResponse? = response.body()
+                        usersFragmentArrayList.clear()
+                        if (myBook != null) {
+                            for (j: GoogleBookItem in myBook.items) {
+                                usersFragmentArrayList.add(
+                                    j.volumeInfo.title
+                                )
+                            }
+                        }
 
                         // Is myBook NOT null?
                         if (myBook != null) {

@@ -20,7 +20,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="@string/hello_viewdatabasefragment"
+                android:text="~~~Hello from the view database fragment ~~"
                 android:textColor="#00695C" />
 
             <Button
