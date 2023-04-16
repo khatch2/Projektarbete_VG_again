@@ -8,8 +8,8 @@
     tools:context=".ViewDatabaseFragment">
 
     <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
 
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
@@ -20,7 +20,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="~~~Hello from the view database fragment ~~"
+                android:text="@string/hello_from_the_view_database_fragment"
                 android:textColor="#00695C" />
 
             <Button
@@ -35,14 +35,19 @@
 
             <ListView
                 android:id="@+id/listView_UsersListFragment"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_width="210sp"
+                android:layout_height="310sp"
+                android:background="@color/wheat"
+                android:clickable="true"
+                android:contextClickable="true"
+                android:longClickable="true" />
 
             <TextView
                 android:id="@+id/tv_CounterValueFragment"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="tvCounterValueFragment TEXT" />
+                android:text="@string/tvcountervaluefragment_text"
+                android:textColor="#00695C" />
 
 
         </androidx.appcompat.widget.LinearLayoutCompat>

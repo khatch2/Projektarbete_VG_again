@@ -9,6 +9,8 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.FrameLayout
+import android.widget.ListView
+import android.widget.TextView
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -43,8 +45,8 @@ class ViewDatabaseFragment : Fragment() {
 
         // ID:s
         val btnViewDatabaseFragmentToResultatFragment: Button = bindingViewDatabaseFragment.btnViewDatabaseFragmentToResultatFragment
-        var usersListFragment = bindingViewDatabaseFragment.listViewUsersListFragment
-        var tvCounterValueFragment = bindingViewDatabaseFragment.tvCounterValueFragment
+        val usersListFragment: ListView = bindingViewDatabaseFragment.listViewUsersListFragment
+        val tvCounterValueFragment: TextView = bindingViewDatabaseFragment.tvCounterValueFragment
 
         // Logic goes here
         // use ArrayAdapter and define an array
@@ -59,7 +61,7 @@ class ViewDatabaseFragment : Fragment() {
         //switchDisplayImageViewFragment.setOnClickListener() {}
 
         // ViewModel
-        val counterViewModelFragment by viewModels<CounterViewModel> ()
+        val counterViewModelFragment: CounterViewModel by viewModels<CounterViewModel> ()
 
         // ViewModel Lifecycle
         lifecycleScope.launch {
@@ -72,15 +74,12 @@ class ViewDatabaseFragment : Fragment() {
             }
         }
 
-
-
         // OnClick
         btnViewDatabaseFragmentToResultatFragment.setOnClickListener() {
             println(" btnViewDatabaseFragmentToResultatFragment was clicked. ")
             Navigation.findNavController(returnedViewViewDatabaseFragment).navigate(R.id.action_viewDatabaseFragment_to_resultatFragment)
         }
         tvCounterValueFragment.setOnClickListener() {}
-
 
         return returnedViewViewDatabaseFragment
     }

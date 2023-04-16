@@ -19,4 +19,6 @@
     <string name="countersearchesvalue_resultatfragment">CounterSearchesValue ResultatFragment</string>
     <string name="to_resultat_fragment">To Resultat Fragment</string>
     <string name="hello_viewdatabasefragment">Hello ViewDatabaseFragment</string>
+    <string name="hello_from_the_view_database_fragment">~~~Hello from the view database fragment ~~</string>
+    <string name="tvcountervaluefragment_text">tvCounterValueFragment TEXT</string>
 </resources>
