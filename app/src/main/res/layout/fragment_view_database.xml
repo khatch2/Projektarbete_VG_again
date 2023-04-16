@@ -8,8 +8,8 @@
     tools:context=".ViewDatabaseFragment">
 
     <ScrollView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
@@ -27,20 +27,20 @@
                 android:id="@+id/btn_viewDatabaseFragmentToResultatFragment"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@color/white"
                 android:fontFamily="times"
                 android:text="@string/to_resultat_fragment"
                 android:textAllCaps="false"
-                android:textColor="#757575" />
+                android:textColor="@color/black" />
 
             <ListView
                 android:id="@+id/listView_UsersListFragment"
-                android:layout_width="210sp"
-                android:layout_height="310sp"
+                android:layout_width="310sp"
+                android:layout_height="410sp"
                 android:background="@color/wheat"
                 android:clickable="true"
                 android:contextClickable="true"
-                android:longClickable="true" />
+                android:longClickable="true"
+                android:verticalScrollbarPosition="right" />
 
             <TextView
                 android:id="@+id/tv_CounterValueFragment"

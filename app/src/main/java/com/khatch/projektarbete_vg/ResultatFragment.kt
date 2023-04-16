@@ -137,12 +137,12 @@ class ResultatFragment : Fragment() {
                 var booksList: List<Book> = emptyList()
                 bookRepository.performDatabaseOperation(Dispatchers.IO) {
                     booksList = bookRepository.getAllBooks()
-                    println("[Inside IO]booksList = $booksList")
+                    //println("[Inside IO]booksList = $booksList")
                     bookRepository.performDatabaseOperation(Dispatchers.Main) {
-                        println("[Inside Main] bookList = $booksList")
+                        //println("[Inside Main] bookList = $booksList")
                     }
                 }
-                booksTitlesFragmentArrayList.clear()
+                //booksTitlesFragmentArrayList.clear()
                 for (j: Book in booksList) {
                     booksTitlesFragmentArrayList.add(
                         j.title.toString()
@@ -190,6 +190,7 @@ class ResultatFragment : Fragment() {
                                     j.volumeInfo.title
                                 )
                             }
+                            println("Line 193: booksTitlesFragmentArrayList = " + booksTitlesFragmentArrayList.toString())
                         }
 
                         // Is myBook NOT null?

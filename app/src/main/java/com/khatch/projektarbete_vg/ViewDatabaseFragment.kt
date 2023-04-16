@@ -21,8 +21,7 @@ import com.khatch.projektarbete_vg.databinding.FragmentViewDatabaseBinding
 import kotlinx.coroutines.launch
 
 public var booksTitlesFragmentArrayList : ArrayList<String> = arrayListOf(
-    "Matthew",
-    "Lukas"
+    "Titles"
 )
 
 class ViewDatabaseFragment : Fragment() {
