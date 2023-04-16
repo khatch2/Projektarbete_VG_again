@@ -20,7 +20,7 @@ import com.khatch.projektarbete_vg.counter.CounterViewModel
 import com.khatch.projektarbete_vg.databinding.FragmentViewDatabaseBinding
 import kotlinx.coroutines.launch
 
-public var usersFragmentArrayList : ArrayList<String> = arrayListOf(
+public var booksTitlesFragmentArrayList : ArrayList<String> = arrayListOf(
     "Matthew",
     "Lukas"
 )
@@ -55,7 +55,7 @@ class ViewDatabaseFragment : Fragment() {
         // access the listView from xml file
         arrayAdapter = ArrayAdapter(requireContext(),
             android.R.layout.simple_list_item_1,
-            usersFragmentArrayList)
+            booksTitlesFragmentArrayList)
         usersListFragment.adapter = arrayAdapter
         arrayAdapter.notifyDataSetChanged()
         //switchDisplayImageViewFragment.setOnClickListener() {}
@@ -68,7 +68,7 @@ class ViewDatabaseFragment : Fragment() {
             repeatOnLifecycle(Lifecycle.State.STARTED){
                 counterViewModelFragment.uiState.collect(){
                     tvCounterValueFragment.text = counterViewModelFragment.uiState.value.counterValue.toString()
-                    usersFragmentArrayList.add(bindingViewDatabaseFragment.tvCounterValueFragment.text.toString())
+                    booksTitlesFragmentArrayList.add(bindingViewDatabaseFragment.tvCounterValueFragment.text.toString())
                     arrayAdapter.notifyDataSetChanged()
                 }
             }

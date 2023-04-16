@@ -142,9 +142,9 @@ class ResultatFragment : Fragment() {
                         println("[Inside Main] bookList = $booksList")
                     }
                 }
-                usersFragmentArrayList.clear()
+                booksTitlesFragmentArrayList.clear()
                 for (j: Book in booksList) {
-                    usersFragmentArrayList.add(
+                    booksTitlesFragmentArrayList.add(
                         j.title.toString()
                     )
                 }
@@ -183,10 +183,10 @@ class ResultatFragment : Fragment() {
                         println("Successfull HTTP code is = " + response.code())
                         //println("response.message() is = " + response.message())
                         var myBook: GoogleBooksResponse? = response.body()
-                        usersFragmentArrayList.clear()
+                        //booksTitlesFragmentArrayList.clear()
                         if (myBook != null) {
                             for (j: GoogleBookItem in myBook.items) {
-                                usersFragmentArrayList.add(
+                                booksTitlesFragmentArrayList.add(
                                     j.volumeInfo.title
                                 )
                             }
@@ -199,7 +199,7 @@ class ResultatFragment : Fragment() {
                                 println("(item of GoogleBookItem).volumeinfo.imageLinks = "
                                         + item.volumeInfo.imageLinks)
                                 // Trying to add title into ArrayAdapter ?
-                                usersFragmentArrayList.add(
+                                booksTitlesFragmentArrayList.add(
                                     myBook.items.first().volumeInfo.title.toString()
                                 )
 
