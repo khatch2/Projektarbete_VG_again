@@ -203,7 +203,7 @@ class ResultatFragment : Fragment() {
                             for (j: GoogleBookItem in myBook.items) {
                                 //booksTitlesFragmentArrayList.add( j.volumeInfo.title )
                             }
-                            println("Line 193: booksTitlesFragmentArrayList = " + booksTitlesFragmentArrayList.toString())
+                            //println("Line 193: booksTitlesFragmentArrayList = " + booksTitlesFragmentArrayList.toString())
                         }
 
                         // Is myBook NOT null?
@@ -307,7 +307,8 @@ class ResultatFragment : Fragment() {
                     println("RoomDB size = " + myFetchedBooks.last().id + " rows")  // TODO - Fix this after Lunch
                 }
 
-                for (j_book: Book in myFetchedBooks) { // TODO: it must enter inside ??
+                for (j_book: Book in myFetchedBooks) { // DONE: it must enter inside ??
+                    println("Notice: Usually the following lines cannot reach the last column in the database !!!")
                     println("Item \"searchedWord\" from myFetchedBooks is: ${j_book.searchedWord}")
                     println("Item \"authors\" from myFetchedBooks is: ${j_book.authors}")
                     println("Item \"id\" from myFetchedBooks is: ${j_book.id}")
