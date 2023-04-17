@@ -144,16 +144,14 @@ class ResultatFragment : Fragment() {
                 }
                 //booksTitlesFragmentArrayList.clear()
                 for (j: Book in booksList) {
-                    booksTitlesFragmentArrayList.add(
-                        j.title.toString()
-                    )
+                   // booksTitlesFragmentArrayList.add( j.title.toString() )
                 }
                 return booksList
             }
 
             // OnClick special variant
             btnViewDatabase.setOnClickListener() {      // DONE : Go to an another Fragment of interact with the database
-                println(" btnViewDatabase eas clicked. ")
+                println(" btnViewDatabase was clicked. ")
                 var retFetched: List<Book> = fetchTheBook()
                 Navigation.findNavController(returnedViewResultatFragment).navigate(
                     R.id.action_resultatFragment_to_viewDatabaseFragment
@@ -165,13 +163,13 @@ class ResultatFragment : Fragment() {
                 .baseUrl("https://www.googleapis.com/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
-            println(" retrofit = " + retrofit)
+            //println(" retrofit = " + retrofit)
 
             val desiredBook: Call<GoogleBooksResponse> =
                 retrofit.create<IGoogleBooks>().getDesiredBook(querySentence)
-            println("desiredBook = " + desiredBook)
-            println("desiredBook.isExecuted " + desiredBook.isExecuted)
-            println("desiredBook.isCanceled " + desiredBook.isCanceled)
+            //println("desiredBook = " + desiredBook)
+            //println("desiredBook.isExecuted " + desiredBook.isExecuted)
+            //println("desiredBook.isCanceled " + desiredBook.isCanceled)
 
             desiredBook.enqueue(object : Callback<GoogleBooksResponse> {
                 override fun onResponse(
@@ -180,15 +178,13 @@ class ResultatFragment : Fragment() {
                 ) {
                     // Status code 200 - 300
                     if(response.isSuccessful){
-                        println("Successfull HTTP code is = " + response.code())
+                        // println("Successfull HTTP code is = " + response.code())
                         //println("response.message() is = " + response.message())
                         var myBook: GoogleBooksResponse? = response.body()
                         //booksTitlesFragmentArrayList.clear()
                         if (myBook != null) {
                             for (j: GoogleBookItem in myBook.items) {
-                                booksTitlesFragmentArrayList.add(
-                                    j.volumeInfo.title
-                                )
+                                //booksTitlesFragmentArrayList.add( j.volumeInfo.title )
                             }
                             println("Line 193: booksTitlesFragmentArrayList = " + booksTitlesFragmentArrayList.toString())
                         }
@@ -196,22 +192,19 @@ class ResultatFragment : Fragment() {
                         // Is myBook NOT null?
                         if (myBook != null) {
                             println(" myBook = " + myBook)
-                            for(item: GoogleBookItem in myBook.items) {
-                                println("(item of GoogleBookItem).volumeinfo.imageLinks = "
-                                        + item.volumeInfo.imageLinks)
+                            //for(item: GoogleBookItem in myBook.items) {
+                                //println("(item of GoogleBookItem).volumeinfo.imageLinks = " + item.volumeInfo.imageLinks)
                                 // Trying to add title into ArrayAdapter ?
-                                booksTitlesFragmentArrayList.add(
-                                    myBook.items.first().volumeInfo.title.toString()
-                                )
+                                booksTitlesFragmentArrayList.add( myBook.items.first().volumeInfo.title.toString() )
 
-                            }
+                            //}
                             tvFirstResultTitle.text = myBook.items.first().volumeInfo.title
                             tvFirstResultDescription.text = myBook.items.first().volumeInfo.description
                             val firstImage = myBook.items.first().volumeInfo.imageLinks?.smallThumbnail
-                            println("firstImage = " + firstImage)
+                            //println("firstImage = " + firstImage)
                             var resultString1 = firstImage?.drop(4)
                             resultString1 = "https" + resultString1
-                            println("resultString1 = " + resultString1)
+                            //println("resultString1 = " + resultString1)
                             Glide.with(bindingResultatFragment.root)
                                 .load(resultString1)
                                  .apply(RequestOptions.overrideOf(450))
@@ -220,10 +213,10 @@ class ResultatFragment : Fragment() {
                             tvSecondResultTitle.text = myBook.items[1].volumeInfo.title
                             tvSecondResultDescription.text = myBook.items[1].volumeInfo.description
                             var secondImage = myBook.items[1].volumeInfo.imageLinks?.smallThumbnail
-                            println("secondImage = " + secondImage)
+                            //println("secondImage = " + secondImage)
                             var resultString2 = secondImage?.drop(4)
                             resultString2 = "https" + resultString2
-                            println("resultString2 = " + resultString2)
+                            //println("resultString2 = " + resultString2)
                             Glide.with(bindingResultatFragment.root)
                                 .load(resultString2)
                                 .apply(RequestOptions.overrideOf(450))
@@ -333,7 +326,7 @@ class ResultatFragment : Fragment() {
                         for (i: String in mySearchQueries) {
                             println("Item from mySearchQueries = $i")
                         }
-                        println("myCounterSearchValue = $myCounterSearchValue")
+                        //println("myCounterSearchValue = $myCounterSearchValue")
                     }
                 }
             }

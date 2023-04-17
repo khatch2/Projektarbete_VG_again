@@ -21,7 +21,7 @@ import com.khatch.projektarbete_vg.databinding.FragmentViewDatabaseBinding
 import kotlinx.coroutines.launch
 
 public var booksTitlesFragmentArrayList : ArrayList<String> = arrayListOf(
-    "Titles"
+    "TITLES"
 )
 
 class ViewDatabaseFragment : Fragment() {
@@ -67,7 +67,7 @@ class ViewDatabaseFragment : Fragment() {
             repeatOnLifecycle(Lifecycle.State.STARTED){
                 counterViewModelFragment.uiState.collect(){
                     tvCounterValueFragment.text = counterViewModelFragment.uiState.value.counterValue.toString()
-                    booksTitlesFragmentArrayList.add(bindingViewDatabaseFragment.tvCounterValueFragment.text.toString())
+                    //booksTitlesFragmentArrayList.add(bindingViewDatabaseFragment.tvCounterValueFragment.text.toString())
                     arrayAdapter.notifyDataSetChanged()
                 }
             }
