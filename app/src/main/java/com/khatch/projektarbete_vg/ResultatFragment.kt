@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -86,6 +87,7 @@ class ResultatFragment : Fragment() {
 
 
         // Logic goes here
+        btnViewDatabase.isVisible = false
         if (edEnterDesiredBookResultatFragment.text.toString() == "") {
             querySentence = "fruntimmer"
         } else {
@@ -103,12 +105,14 @@ class ResultatFragment : Fragment() {
 
         //ivFox.setOnClickListener() {}
         btnBookSearchResultatFragment.setOnClickListener() {
+            btnViewDatabase.isVisible = true
 
             if (edEnterDesiredBookResultatFragment.text.toString() == "") {
                 querySentence = "fruntimmer"
             } else {
                 querySentence = edEnterDesiredBookResultatFragment.text.toString()
             }
+
 
             // Declaration of INSERT
             fun insertTheBook(
@@ -350,6 +354,8 @@ class ResultatFragment : Fragment() {
                 }
             }
         }
+
+        //btnViewDatabase.isVisible = true
 
         return returnedViewResultatFragment
     }
