@@ -31,13 +31,12 @@ public var booksList: List<Book> = emptyList()
 
 class ResultatFragment : Fragment() {
     private lateinit var bindingResultatFragment: FragmentResultatBinding
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
     }
 
-    //private var baseUrl = "https://www.googleapis.com/"
+    /** private var baseUrl = "https://www.googleapis.com/" **/
     private var querySentence = ""
 
     //@SuppressLint("UnsafeRepeatOnLifecycleDetector")
@@ -52,7 +51,6 @@ class ResultatFragment : Fragment() {
 
         // setting RoomDB
         val db: AppDatabase = AppDatabase.getInstance(this@ResultatFragment.requireContext())
-        //val db: AppDatabase = AppDatabase.getInstance(applicationContext)
         val bookRepository = BookRepository(db, lifecycleScope)
         println(
             " The path of my-google-books-database.db is:  " + requireContext().getDatabasePath(/* name = */
@@ -62,8 +60,6 @@ class ResultatFragment : Fragment() {
 
         // ViewModel
         val counterSearchesViewModel: CounterSearchesViewModel by viewModels<CounterSearchesViewModel>()
-        //val counterViewModel by viewModels <CounterViewModel>()
-        //println(" counterSearchesViewModel = $counterSearchesViewModel ")
 
         // ID:s
         val tvCounterSearchesValueResultatFragment: TextView =
@@ -80,11 +76,10 @@ class ResultatFragment : Fragment() {
             bindingResultatFragment.ivGoogleBooksLillaFruntimmer
         val tvGoogleBooksApiDescResultatFragment: TextView =
             bindingResultatFragment.tvGoogleBooksApiDescResultatFragment
-        val tvSecondResultTitle = bindingResultatFragment.tvSecondResultTitle
-        val tvSecondResultDescription = bindingResultatFragment.tvSecondResultDescription
-        val btnViewDatabase = bindingResultatFragment.btnViewDatabase
-        //var ivFox = bindingResultatFragment.ivFox
-
+        val tvSecondResultTitle: TextView = bindingResultatFragment.tvSecondResultTitle
+        val tvSecondResultDescription: TextView = bindingResultatFragment.tvSecondResultDescription
+        val btnViewDatabase: Button = bindingResultatFragment.btnViewDatabase
+        val btnDeleteAtRow3Testing: Button = bindingResultatFragment.btnDeleteAtRow3Testing
 
         // Logic goes here
         btnViewDatabase.isVisible = false
@@ -103,7 +98,37 @@ class ResultatFragment : Fragment() {
         tvSecondResultTitle.setOnClickListener() {}
         tvSecondResultDescription.setOnClickListener() {}
 
-        //ivFox.setOnClickListener() {}
+
+        // Declaration of testingDelete
+        fun testingDelete(anItem: Int): List<Book> {
+            var booksListTesting: List<Book> = emptyList()
+            var number: Int
+            bookRepository.performDatabaseOperation(Dispatchers.IO) {
+                number = bookRepository.deleteRow(anItem)
+                if (booksListTesting.isNotEmpty()) {
+                    println("[Dispatchers.IO] booksListTesting size = " + booksListTesting.last().id)
+                    println("[Inside IO]booksListTesting = $booksListTesting")
+                    println("[Dispatchers.IO] number = " + number)
+                }
+
+                bookRepository.performDatabaseOperation(Dispatchers.Main) {
+                    if (booksListTesting.isNotEmpty()) {
+                        println("[Dispatchers.Main] booksListTesting size = " + booksListTesting.last().id)
+                        println("[Inside Main] bookListTesting = $booksListTesting")
+                        println("[Dispatchers.Main] number  = " + number)
+                    }
+                }
+            }
+            return booksListTesting
+        }
+
+        btnDeleteAtRow3Testing.setOnClickListener() {
+            testingDelete(3) // TODO : Check if it works, i.e. Here i wanted to test deleting the third row of RoomDB
+        }
+
+
+
+
         btnBookSearchResultatFragment.setOnClickListener() {
             btnViewDatabase.isVisible = true
 
@@ -113,28 +138,31 @@ class ResultatFragment : Fragment() {
                 querySentence = edEnterDesiredBookResultatFragment.text.toString()
             }
 
-
             // Declaration of INSERT
             fun insertTheBook(
                 searchedWord: String, title: String, authors: List<String>?,
                 publishedDate: String, description: String, smallThumbnail: String,
-                thumbnail: String) {
+                thumbnail: String
+            ) {
                 if (authors != null) {
                     bookRepository.performDatabaseOperation(Dispatchers.IO) {
                         bookRepository.addBook(
-                            Book(searchedWord, title, authors.first(), publishedDate,
-                                description, smallThumbnail, thumbnail)
+                            Book(
+                                searchedWord, title, authors.first(), publishedDate,
+                                description, smallThumbnail, thumbnail
+                            )
                         )
                     }
                 } else {
                     bookRepository.performDatabaseOperation(Dispatchers.IO) {
                         bookRepository.addBook(
-                            Book(searchedWord, title, "isEmpty", publishedDate,
-                                description, smallThumbnail, thumbnail)
+                            Book(
+                                searchedWord, title, "isEmpty", publishedDate,
+                                description, smallThumbnail, thumbnail
+                            )
                         )
                     }
                 }
-
             }
 
             // Declaration of FETCH
@@ -143,7 +171,7 @@ class ResultatFragment : Fragment() {
                 bookRepository.performDatabaseOperation(Dispatchers.IO) {
                     booksList = bookRepository.getAllBooks()
 
-                    if(booksList.isNotEmpty()) {
+                    if (booksList.isNotEmpty()) {
                         println("[Dispatchers.IO] booksList size = " + booksList.last().id)
                         println("[Inside IO]booksList = $booksList")
                     }
@@ -166,7 +194,7 @@ class ResultatFragment : Fragment() {
             btnViewDatabase.setOnClickListener() {      // DONE : Go to an another Fragment of interact with the database
                 println(" btnViewDatabase was clicked. ")
                 val retFetched: List<Book> = fetchTheBook()
-                println(" retFetched = "+ retFetched)  // TODO - It looks like that here retfetched is Nothing
+                println(" retFetched = " + retFetched)  // TODO - It looks like that here retfetched is Nothing
                 if (retFetched.isNotEmpty()) {
                     println("RoomDB size = " + retFetched.last().id + " rows")  // TODO - Fix this after Lunch
                 }
@@ -180,13 +208,9 @@ class ResultatFragment : Fragment() {
                 .baseUrl("https://www.googleapis.com/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
-            //println(" retrofit = " + retrofit)
 
             val desiredBook: Call<GoogleBooksResponse> =
                 retrofit.create<IGoogleBooks>().getDesiredBook(querySentence)
-            //println("desiredBook = " + desiredBook)
-            //println("desiredBook.isExecuted " + desiredBook.isExecuted)
-            //println("desiredBook.isCanceled " + desiredBook.isCanceled)
 
             desiredBook.enqueue(object : Callback<GoogleBooksResponse> {
                 override fun onResponse(
@@ -194,46 +218,33 @@ class ResultatFragment : Fragment() {
                     response: Response<GoogleBooksResponse>
                 ) {
                     // Status code 200 - 300
-                    if(response.isSuccessful){
-                        // println("Successfull HTTP code is = " + response.code())
-                        //println("response.message() is = " + response.message())
+                    if (response.isSuccessful) {
                         val myBook: GoogleBooksResponse? = response.body()
-                        //booksTitlesFragmentArrayList.clear()
-                        if (myBook != null) {
-                            for (j: GoogleBookItem in myBook.items) {
-                                //booksTitlesFragmentArrayList.add( j.volumeInfo.title )
-                            }
-                            //println("Line 193: booksTitlesFragmentArrayList = " + booksTitlesFragmentArrayList.toString())
-                        }
 
                         // Is myBook NOT null?
                         if (myBook != null) {
                             println(" myBook = " + myBook)
-                            //for(item: GoogleBookItem in myBook.items) {
-                                //println("(item of GoogleBookItem).volumeinfo.imageLinks = " + item.volumeInfo.imageLinks)
-                                // Trying to add title into ArrayAdapter ?
-                                booksTitlesFragmentArrayList.add( myBook.items.first().volumeInfo.title.toString() )
+                            booksTitlesFragmentArrayList.add(myBook.items.first().volumeInfo.title.toString())
 
-                            //}
                             tvFirstResultTitle.text = myBook.items.first().volumeInfo.title
-                            tvFirstResultDescription.text = myBook.items.first().volumeInfo.description
-                            val firstImage = myBook.items.first().volumeInfo.imageLinks?.smallThumbnail
-                            //println("firstImage = " + firstImage)
+                            tvFirstResultDescription.text =
+                                myBook.items.first().volumeInfo.description
+
+                            val firstImage =
+                                myBook.items.first().volumeInfo.imageLinks?.smallThumbnail
                             var resultString1 = firstImage?.drop(4)
                             resultString1 = "https" + resultString1
-                            //println("resultString1 = " + resultString1)
                             Glide.with(bindingResultatFragment.root)
                                 .load(resultString1)
-                                 .apply(RequestOptions.overrideOf(450))
+                                .apply(RequestOptions.overrideOf(450))
                                 .into(ivFirstResult)
 
                             tvSecondResultTitle.text = myBook.items[1].volumeInfo.title
                             tvSecondResultDescription.text = myBook.items[1].volumeInfo.description
+
                             val secondImage = myBook.items[1].volumeInfo.imageLinks?.smallThumbnail
-                            //println("secondImage = " + secondImage)
                             var resultString2 = secondImage?.drop(4)
                             resultString2 = "https" + resultString2
-                            //println("resultString2 = " + resultString2)
                             Glide.with(bindingResultatFragment.root)
                                 .load(resultString2)
                                 .apply(RequestOptions.overrideOf(450))
@@ -248,21 +259,17 @@ class ResultatFragment : Fragment() {
                                 myBook.items.first().volumeInfo.imageLinks?.smallThumbnail.toString(),
                                 myBook.items.first().volumeInfo.imageLinks?.thumbnail.toString()
                             )
-
                         }
                     } else {
-                        println(" ERROR myBook was null !!! "+" HTTP code = " + response.code()) // DONE: FIXED http_error was = 400
+                        println(" ERROR myBook was null !!! " + " HTTP code = " + response.code()) // DONE: FIXED http_error was = 400
                     }
                 }
-
                 override fun onFailure(call: Call<GoogleBooksResponse>, t: Throwable) {
                     // ERROR + 404 Not found
                     // ERROR + No Internet Connection
                     println(" ERROR  = ${t.message}")
-                    //println(t.printStackTrace().toString())
                     println(t.localizedMessage)
                     println(t.fillInStackTrace())
-
                     println()
                     println(" call.request() ${call.request()}")
                     println(" call.toString() $call")
@@ -270,39 +277,28 @@ class ResultatFragment : Fragment() {
                     println("call.timeout() ${call.timeout()}")
                 }
             })
-
-
-
-
-
             counterSearchesViewModel.push(element = edEnterDesiredBookResultatFragment.text.toString())
             counterSearchesViewModel.add()
             println("size of counterSearchesViewModel = ${counterSearchesViewModel.uiState.value.searchQueries.size}") // Then to change this line to see the last pushed string on Array
             for (myString in counterSearchesViewModel.uiState.value.searchQueries) {
                 println(" myString = $myString")
             }
-
             if (counterSearchesViewModel.uiState.value.searchQueries.isNotEmpty()) {
                 // Update UI Elements
                 tvCounterSearchesValueResultatFragment.text = " Last counterSearchesValue = " +
-                    counterSearchesViewModel.uiState.value.searchQueries.get(
-                        counterSearchesViewModel.uiState.value.searchQueries.size - 1
-                    ).toString()
-                //println("searchQueries are: "+counterSearchesViewModel.uiState.value.searchQueries.toString())
+                        counterSearchesViewModel.uiState.value.searchQueries.get(
+                            counterSearchesViewModel.uiState.value.searchQueries.size - 1
+                        ).toString()
                 println("searchQueries size = " + counterSearchesViewModel.uiState.value.searchQueries.size)
                 print("searchQueries are: ")
-                for (i_String in counterSearchesViewModel.uiState.value.searchQueries) {
+                for (i_String: String in counterSearchesViewModel.uiState.value.searchQueries) {
                     print("$i_String , ")
                 }
-                //println("==== counterSearchesViewModel.uiState.value.searchQueries ====")
-
-
-
-
                 println()
                 println("<===========================>")
                 println("Fetching Books from RoomDB")
-                var myFetchedBooks: List<Book> = fetchTheBook()  // TODO - It looks like that here myFetchedBooks.isEmpty() was true !!!
+                var myFetchedBooks: List<Book> =
+                    fetchTheBook()  // TODO - It looks like that here myFetchedBooks.isEmpty() was true !!!
                 if (myFetchedBooks.isNotEmpty()) {
                     println("RoomDB size = " + myFetchedBooks.last().id + " rows")  // TODO - Fix this after Lunch
                 }
@@ -320,19 +316,13 @@ class ResultatFragment : Fragment() {
                 println("=== END Search History ===")
                 Toast.makeText(
                     /* context = */ requireContext(),
-                    /* text = */
-                    "{ ${edEnterDesiredBookResultatFragment.text} } has been added to " +
-                            "the search history successfully. ",
-                    /* duration = */
-                    Toast.LENGTH_LONG
+                    /* text = */ "{ ${edEnterDesiredBookResultatFragment.text} } has been added to "
+                            + "the search history successfully. ",
+                    /* duration = */ Toast.LENGTH_LONG
                 ).show()
             }
             ivGoogleBooksLillaFruntimmer.setOnClickListener() {}
             tvGoogleBooksApiDescResultatFragment.setOnClickListener() {}
-
-
-            // access the ListView from xml-file
-
 
             // ViewModel Lifecycle
             lifecycleScope.launch {
@@ -348,28 +338,10 @@ class ResultatFragment : Fragment() {
                         for (i: String in mySearchQueries) {
                             println("Item from mySearchQueries = $i")
                         }
-                        //println("myCounterSearchValue = $myCounterSearchValue")
                     }
                 }
             }
         }
-
-        //btnViewDatabase.isVisible = true
-
         return returnedViewResultatFragment
     }
-
-
-
-
-
-
-        // OnClick Snack-bar Fragment
-
-        // OnClick ViewModel Value btnAddTomatoFragment
-
-        // OnClick
-
-
-    }
-
+}

@@ -141,6 +141,16 @@
                 android:minHeight="48dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/btn_deleteAtRow3Testing"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="times"
+                android:text="Delete at row 3 Testing"
+                android:textAllCaps="false"
+                android:textColor="@color/black" />
+
             <Button
                 android:id="@+id/btn_BookSearchResultatFragment"
                 android:layout_width="wrap_content"

@@ -19,6 +19,10 @@ class BookRepository(
         return appDatabase.bookDao().getAllBooks()
     }
 
+    fun deleteRow(b: Int): Int {
+        return appDatabase.bookDao().deleteRow(b)
+    }
+
     // Allows Working with Threads
     fun performDatabaseOperation(
         dispatcher: CoroutineDispatcher,

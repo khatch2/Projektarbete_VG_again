@@ -49,6 +49,15 @@
                 android:text="@string/tvcountervaluefragment_text"
                 android:textColor="#00695C" />
 
+            <Button
+                android:id="@+id/btn_deleteAtRow3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="times"
+                android:text="Delete at row 3"
+                android:textAllCaps="false"
+                android:textColor="@color/black" />
+
 
         </androidx.appcompat.widget.LinearLayoutCompat>
     </ScrollView>
