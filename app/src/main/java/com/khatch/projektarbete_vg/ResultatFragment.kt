@@ -53,7 +53,7 @@ class ResultatFragment : Fragment() {
         //val db: AppDatabase = AppDatabase.getInstance(applicationContext)
         val bookRepository = BookRepository(db, lifecycleScope)
         println(
-            " The path of my-google-books-database.db is:  " + requireContext().getDatabasePath(/* p0 = */
+            " The path of my-google-books-database.db is:  " + requireContext().getDatabasePath(/* name = */
                 "my-google-books-database.db"
             )
         )
@@ -152,7 +152,8 @@ class ResultatFragment : Fragment() {
             // OnClick special variant
             btnViewDatabase.setOnClickListener() {      // DONE : Go to an another Fragment of interact with the database
                 println(" btnViewDatabase was clicked. ")
-                var retFetched: List<Book> = fetchTheBook()
+                val retFetched: List<Book> = fetchTheBook()
+                println(" retFetched = "+ retFetched)
                 Navigation.findNavController(returnedViewResultatFragment).navigate(
                     R.id.action_resultatFragment_to_viewDatabaseFragment
                 )
@@ -180,7 +181,7 @@ class ResultatFragment : Fragment() {
                     if(response.isSuccessful){
                         // println("Successfull HTTP code is = " + response.code())
                         //println("response.message() is = " + response.message())
-                        var myBook: GoogleBooksResponse? = response.body()
+                        val myBook: GoogleBooksResponse? = response.body()
                         //booksTitlesFragmentArrayList.clear()
                         if (myBook != null) {
                             for (j: GoogleBookItem in myBook.items) {
@@ -212,7 +213,7 @@ class ResultatFragment : Fragment() {
 
                             tvSecondResultTitle.text = myBook.items[1].volumeInfo.title
                             tvSecondResultDescription.text = myBook.items[1].volumeInfo.description
-                            var secondImage = myBook.items[1].volumeInfo.imageLinks?.smallThumbnail
+                            val secondImage = myBook.items[1].volumeInfo.imageLinks?.smallThumbnail
                             //println("secondImage = " + secondImage)
                             var resultString2 = secondImage?.drop(4)
                             resultString2 = "https" + resultString2
@@ -323,6 +324,7 @@ class ResultatFragment : Fragment() {
                             counterSearchesViewModel.uiState.value.searchQueries
                         val myCounterSearchValue: Int =
                             counterSearchesViewModel.uiState.value.counterSearchesValue
+                        println(" myCounterSearchValue = " + myCounterSearchValue)
                         for (i: String in mySearchQueries) {
                             println("Item from mySearchQueries = $i")
                         }
