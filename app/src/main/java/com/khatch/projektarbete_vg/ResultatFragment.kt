@@ -240,9 +240,7 @@ class ResultatFragment : Fragment() {
                                 .into(ivSecondResult)
 
                             insertTheBook(
-                                counterSearchesViewModel.uiState.value.searchQueries[
-                                        counterSearchesViewModel.uiState.value.searchQueries.size - 1
-                                ], // Here is searchedWord
+                                querySentence, // Here is searchedWord
                                 myBook.items.first().volumeInfo.title,
                                 myBook.items.first().volumeInfo.authors,
                                 myBook.items.first().volumeInfo.publishedDate.toString(),
