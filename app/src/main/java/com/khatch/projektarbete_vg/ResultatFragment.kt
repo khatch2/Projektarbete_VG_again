@@ -26,6 +26,7 @@ import kotlinx.coroutines.launch
 import retrofit2.*
 import retrofit2.converter.gson.GsonConverterFactory
 
+public var booksList: List<Book> = emptyList()
 
 class ResultatFragment : Fragment() {
     private lateinit var bindingResultatFragment: FragmentResultatBinding
@@ -134,18 +135,26 @@ class ResultatFragment : Fragment() {
 
             // Declaration of FETCH
             fun fetchTheBook(): List<Book> {
-                var booksList: List<Book> = emptyList()
+                // var booksList: List<Book> = emptyList()
                 bookRepository.performDatabaseOperation(Dispatchers.IO) {
                     booksList = bookRepository.getAllBooks()
-                    //println("[Inside IO]booksList = $booksList")
+
+                    if(booksList.isNotEmpty()) {
+                        println("[Dispatchers.IO] booksList size = " + booksList.last().id)
+                        println("[Inside IO]booksList = $booksList")
+                    }
+
                     bookRepository.performDatabaseOperation(Dispatchers.Main) {
-                        //println("[Inside Main] bookList = $booksList")
+
+                        if (booksList.isNotEmpty()) {
+                            println("[Dispatchers.Main] booksList size = " + booksList.last().id)
+                            println("[Inside Main] bookList = $booksList")
+                        }
+
                     }
                 }
                 //booksTitlesFragmentArrayList.clear()
-                for (j: Book in booksList) {
-                   // booksTitlesFragmentArrayList.add( j.title.toString() )
-                }
+                //for (j: Book in booksList) { booksTitlesFragmentArrayList.add( j.title.toString() ) }
                 return booksList
             }
 
@@ -153,7 +162,10 @@ class ResultatFragment : Fragment() {
             btnViewDatabase.setOnClickListener() {      // DONE : Go to an another Fragment of interact with the database
                 println(" btnViewDatabase was clicked. ")
                 val retFetched: List<Book> = fetchTheBook()
-                println(" retFetched = "+ retFetched)
+                println(" retFetched = "+ retFetched)  // TODO - It looks like that here retfetched is Nothing
+                if (retFetched.isNotEmpty()) {
+                    println("RoomDB size = " + retFetched.last().id + " rows")  // TODO - Fix this after Lunch
+                }
                 Navigation.findNavController(returnedViewResultatFragment).navigate(
                     R.id.action_resultatFragment_to_viewDatabaseFragment
                 )
@@ -275,6 +287,7 @@ class ResultatFragment : Fragment() {
                         counterSearchesViewModel.uiState.value.searchQueries.size - 1
                     ).toString()
                 //println("searchQueries are: "+counterSearchesViewModel.uiState.value.searchQueries.toString())
+                println("searchQueries size = " + counterSearchesViewModel.uiState.value.searchQueries.size)
                 print("searchQueries are: ")
                 for (i_String in counterSearchesViewModel.uiState.value.searchQueries) {
                     print("$i_String , ")
@@ -287,8 +300,11 @@ class ResultatFragment : Fragment() {
                 println()
                 println("<===========================>")
                 println("Fetching Books from RoomDB")
-                val myFetchedBooks: List<Book> = fetchTheBook()
-                println("RoomDB size = ${myFetchedBooks.size}")  // TODO - Fix this after Lunch
+                var myFetchedBooks: List<Book> = fetchTheBook()  // TODO - It looks like that here myFetchedBooks.isEmpty() was true !!!
+                if (myFetchedBooks.isNotEmpty()) {
+                    println("RoomDB size = " + myFetchedBooks.last().id + " rows")  // TODO - Fix this after Lunch
+                }
+
                 for (j_book: Book in myFetchedBooks) { // TODO: it must enter inside ??
                     println("Item \"searchedWord\" from myFetchedBooks is: ${j_book.searchedWord}")
                     println("Item \"authors\" from myFetchedBooks is: ${j_book.authors}")
@@ -325,6 +341,7 @@ class ResultatFragment : Fragment() {
                         val myCounterSearchValue: Int =
                             counterSearchesViewModel.uiState.value.counterSearchesValue
                         println(" myCounterSearchValue = " + myCounterSearchValue)
+                        println("mySearchQueries.size =" + mySearchQueries.size)
                         for (i: String in mySearchQueries) {
                             println("Item from mySearchQueries = $i")
                         }
