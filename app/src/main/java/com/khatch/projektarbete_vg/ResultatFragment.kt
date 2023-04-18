@@ -102,20 +102,20 @@ class ResultatFragment : Fragment() {
         // Declaration of testingDelete
         fun testingDelete(anItem: Int): List<Book> {
             var booksListTesting: List<Book> = emptyList()
-            var number: Int
+            var numberOfDeletedRow: Int
             bookRepository.performDatabaseOperation(Dispatchers.IO) {
-                number = bookRepository.deleteRow(anItem)
+                numberOfDeletedRow = bookRepository.deleteRow(anItem)
                 if (booksListTesting.isNotEmpty()) {
                     println("[Dispatchers.IO] booksListTesting size = " + booksListTesting.last().id)
                     println("[Inside IO]booksListTesting = $booksListTesting")
-                    println("[Dispatchers.IO] number = " + number)
+                    println("[Dispatchers.IO] number = " + numberOfDeletedRow)
                 }
 
                 bookRepository.performDatabaseOperation(Dispatchers.Main) {
                     if (booksListTesting.isNotEmpty()) {
                         println("[Dispatchers.Main] booksListTesting size = " + booksListTesting.last().id)
                         println("[Inside Main] bookListTesting = $booksListTesting")
-                        println("[Dispatchers.Main] number  = " + number)
+                        println("[Dispatchers.Main] number  = " + numberOfDeletedRow)
                     }
                 }
             }
