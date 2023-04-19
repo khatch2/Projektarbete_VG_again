@@ -4,9 +4,10 @@ import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
+import androidx.room.Update
 
 
-// Our Queries
+// My Queries
 @Dao
 interface IBookDao {
     @Insert
@@ -16,6 +17,21 @@ interface IBookDao {
 
     @Query("DELETE FROM Books WHERE id = :targetedId")
     fun deleteRow(targetedId: Int): Int
+
+
+
+
+
+    @Update
+    fun updateBook(book : Book)
+
+    @Update
+    fun updateBooks(books: List<Book>): Int
+
+    @Query("UPDATE Books SET title = :myNewString WHERE id = :desiredId")
+    fun updateTitle(desiredId: Int, myNewString: String?): Int
+
+
 
 
 

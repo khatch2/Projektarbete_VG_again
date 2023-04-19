@@ -23,6 +23,10 @@ class BookRepository(
         return appDatabase.bookDao().deleteRow(b)
     }
 
+    fun updateBookTitle(c: Int, newStr: String): Int {
+        return appDatabase.bookDao().updateTitle(c, newStr)
+    }
+
     // Allows Working with Threads
     fun performDatabaseOperation(
         dispatcher: CoroutineDispatcher,

@@ -80,9 +80,10 @@ class ResultatFragment : Fragment() {
         val tvSecondResultDescription: TextView = bindingResultatFragment.tvSecondResultDescription
         val btnViewDatabase: Button = bindingResultatFragment.btnViewDatabase
         val btnDeleteAtRow3Testing: Button = bindingResultatFragment.btnDeleteAtRow3Testing
+        val btnUpdateAtRow2Testing: Button = bindingResultatFragment.btnUpdateAtRow2Testing
 
         // Logic goes here
-        btnViewDatabase.isVisible = false
+        //btnViewDatabase.isVisible = false
         if (edEnterDesiredBookResultatFragment.text.toString() == "") {
             querySentence = "fruntimmer"
         } else {
@@ -97,6 +98,24 @@ class ResultatFragment : Fragment() {
         edEnterDesiredBookResultatFragment.setOnClickListener() {}
         tvSecondResultTitle.setOnClickListener() {}
         tvSecondResultDescription.setOnClickListener() {}
+
+        // DONE: I want to test to change title att row 2 of db-file to "Sti"
+        // Declaration of testingUpdate
+        fun testingUpdate(intPos: Int, desiredNewString: String): Int {
+            var var1: Int = 0
+            bookRepository.performDatabaseOperation(Dispatchers.IO) {
+                var1 = bookRepository.updateBookTitle(intPos, desiredNewString)
+
+                bookRepository.performDatabaseOperation(Dispatchers.Main) {
+                }
+            }
+            println(" Done, var1 = "+var1)
+            return var1
+        }
+        btnUpdateAtRow2Testing.setOnClickListener() {
+            println("btnUpdateAtRow2Testing has been clicked. " + btnUpdateAtRow2Testing)
+            testingUpdate(2, "Sti")
+        }
 
 
         // Declaration of testingDelete

@@ -163,6 +163,16 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                  />
+
+            <Button
+                android:id="@+id/btn_updateAtRow2Testing"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="times"
+                android:text="Update title at row 2 Testing, to Sti"
+                android:textAllCaps="false"
+                android:textColor="@color/black" />
+
             <TextView
                 android:id="@+id/tv_Separation_Many_Tildas_4"
                 android:layout_width="wrap_content"
