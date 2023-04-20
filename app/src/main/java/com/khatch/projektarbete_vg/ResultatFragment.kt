@@ -142,7 +142,7 @@ class ResultatFragment : Fragment() {
         }
 
         btnDeleteAtRow3Testing.setOnClickListener() {
-            testingDelete(3) // TODO : Check if it works, i.e. Here i wanted to test deleting the third row of RoomDB
+            testingDelete(3) // DONE : Check if it works, i.e. Here i wanted to test deleting the third row of RoomDB
         }
 
 
@@ -347,7 +347,7 @@ class ResultatFragment : Fragment() {
             lifecycleScope.launch {
                 repeatOnLifecycle(Lifecycle.State.STARTED) {
                     counterSearchesViewModel.uiState.collect() {
-                        // TODO : MUST to rewrite this part to achieve the Updating UI Elements
+                        // DONE : MUST to rewrite this part to achieve the Updating UI Elements
                         val mySearchQueries: Array<String> =
                             counterSearchesViewModel.uiState.value.searchQueries
                         val myCounterSearchValue: Int =

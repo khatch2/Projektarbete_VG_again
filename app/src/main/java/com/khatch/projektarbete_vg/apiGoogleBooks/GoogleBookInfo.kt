@@ -10,4 +10,8 @@ data class GoogleBookInfo(
     @SerializedName("publishedDate") val publishedDate: String?,
     @SerializedName("description") val description: String?,
     @SerializedName("imageLinks") val imageLinks: GoogleBookImageLinks?
-) {}
+) {
+    override fun toString(): String {
+        return "GoogleBookInfo(title='$title', authors=$authors, publisher=$publisher, publishedDate=$publishedDate, description=$description, imageLinks=$imageLinks)"
+    }
+}

@@ -9,7 +9,7 @@ class BookRepository(
     private val appDatabase: AppDatabase,       // Our Database Class
     private val coroutineScope: CoroutineScope  // Allows work with Threads
 ) {
-    /* TODO - DEFINE OUR METHODS FOR QUERIES */
+    /* DONE - DEFINE OUR METHODS FOR QUERIES */
 
     fun addBook(book: Book) {
         appDatabase.bookDao().addBook(book)
