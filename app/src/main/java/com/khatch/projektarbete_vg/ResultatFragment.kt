@@ -163,10 +163,14 @@ class ResultatFragment : Fragment() {
                 thumbnail: String
             ) {
                 if (authors != null) {
+                    var listOfAuthors: String = ""
+                    for (strInne: String in authors) {
+                        listOfAuthors = listOfAuthors + " " + strInne + " ; "
+                    }
                     bookRepository.performDatabaseOperation(Dispatchers.IO) {
                         bookRepository.addBook(
                             Book(
-                                searchedWord, title, authors.first(), publishedDate,
+                                searchedWord, title, listOfAuthors, publishedDate,
                                 description, smallThumbnail, thumbnail
                             )
                         )
@@ -271,7 +275,7 @@ class ResultatFragment : Fragment() {
                             insertTheBook(
                                 querySentence, // Here is searchedWord
                                 myBook.items.first().volumeInfo.title,
-                                ArrayList(myBook.items.first().volumeInfo.authors),
+                                myBook.items.first().volumeInfo.authors,
                                 myBook.items.first().volumeInfo.publishedDate.toString(),
                                 myBook.items.first().volumeInfo.description.toString(),
                                 myBook.items.first().volumeInfo.imageLinks?.smallThumbnail.toString(),
