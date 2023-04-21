@@ -17,8 +17,13 @@ data class Book (
     var description: String? = null,
     var smallThumbnail: String? = null,
     var thumbnail: String? = null
-    ) {
-        @PrimaryKey(autoGenerate = true)
-        var id: Long? = null
+    )
+{
+    @PrimaryKey(autoGenerate = true)
+    var id: Long? = null
+
+    override fun toString(): String {
+        return "Book(searchedWord='$searchedWord', title=$title, authors=$authors, publishedDate=$publishedDate, description=$description, smallThumbnail=$smallThumbnail, thumbnail=$thumbnail, id=$id)"
+    }
 }
 

@@ -15,8 +15,8 @@ class BookRepository(
         appDatabase.bookDao().addBook(book)
     }
 
-    fun getAllBooks(): List<Book> {
-        return appDatabase.bookDao().getAllBooks()
+    fun getAllBooks(): ArrayList<Book> {
+        return ArrayList(appDatabase.bookDao().getAllBooks())
     }
 
     fun deleteRow(b: Int): Int {

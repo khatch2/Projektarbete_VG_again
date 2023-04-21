@@ -118,9 +118,9 @@ class ResultatFragment : Fragment() {
 
 
         // Declaration of testingDelete
-        fun testingDelete(anItem: Int): List<Book> {
-            var booksListTesting: List<Book> = emptyList()
-            var numberOfDeletedRow: Int
+        fun testingDelete(anItem: Int): ArrayList<Book> {
+            var booksListTesting: ArrayList<Book> = arrayListOf()
+            var numberOfDeletedRow: Int = 0
             bookRepository.performDatabaseOperation(Dispatchers.IO) {
                 numberOfDeletedRow = bookRepository.deleteRow(anItem)
                 if (booksListTesting.isNotEmpty()) {
@@ -158,7 +158,7 @@ class ResultatFragment : Fragment() {
 
             // Declaration of INSERT
             fun insertTheBook(
-                searchedWord: String, title: String, authors: List<String>?,
+                searchedWord: String, title: String, authors: ArrayList<String>?,
                 publishedDate: String, description: String, smallThumbnail: String,
                 thumbnail: String
             ) {
@@ -184,7 +184,7 @@ class ResultatFragment : Fragment() {
             }
 
             // Declaration of FETCH
-            fun fetchTheBook(): List<Book> {
+            fun fetchTheBook(): ArrayList<Book> {
                 // var booksList: List<Book> = emptyList()
                 bookRepository.performDatabaseOperation(Dispatchers.IO) {
                     booksArrayList = bookRepository.getAllBooks() as ArrayList<Book>
@@ -211,7 +211,7 @@ class ResultatFragment : Fragment() {
             // OnClick special variant
             btnViewDatabase.setOnClickListener() {      // DONE : Go to an another Fragment of interact with the database
                 println(" btnViewDatabase was clicked. ")
-                val retFetched: List<Book> = fetchTheBook()
+                val retFetched: ArrayList<Book> = fetchTheBook() as ArrayList<Book>
                 println(" retFetched = " + retFetched)  // TODO - It looks like that here retfetched is Nothing
                 if (retFetched.isNotEmpty()) {
                     println("RoomDB size = " + retFetched.last().id + " rows")  // TODO - Fix this after Lunch
@@ -271,7 +271,7 @@ class ResultatFragment : Fragment() {
                             insertTheBook(
                                 querySentence, // Here is searchedWord
                                 myBook.items.first().volumeInfo.title,
-                                myBook.items.first().volumeInfo.authors,
+                                ArrayList(myBook.items.first().volumeInfo.authors),
                                 myBook.items.first().volumeInfo.publishedDate.toString(),
                                 myBook.items.first().volumeInfo.description.toString(),
                                 myBook.items.first().volumeInfo.imageLinks?.smallThumbnail.toString(),
@@ -315,8 +315,8 @@ class ResultatFragment : Fragment() {
                 println()
                 println("<===========================>")
                 println("Fetching Books from RoomDB")
-                var myFetchedBooks: List<Book> =
-                    fetchTheBook()  // TODO - It looks like that here myFetchedBooks.isEmpty() was true !!!
+                var myFetchedBooks: ArrayList<Book> =
+                    fetchTheBook() as ArrayList<Book>  // TODO - It looks like that here myFetchedBooks.isEmpty() was true !!!
                 if (myFetchedBooks.isNotEmpty()) {
                     println("RoomDB size = " + myFetchedBooks.last().id + " rows")  // TODO - Fix this after Lunch
                 }
