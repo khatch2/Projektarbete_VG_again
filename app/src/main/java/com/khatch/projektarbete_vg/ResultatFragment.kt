@@ -15,7 +15,6 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.Navigation
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import com.khatch.projektarbete_vg.apiGoogleBooks.GoogleBookItem
 import com.khatch.projektarbete_vg.apiGoogleBooks.GoogleBooksResponse
 import com.khatch.projektarbete_vg.apiGoogleBooks.IGoogleBooks
 import com.khatch.projektarbete_vg.book.Book
@@ -27,7 +26,7 @@ import kotlinx.coroutines.launch
 import retrofit2.*
 import retrofit2.converter.gson.GsonConverterFactory
 
-public var booksList: List<Book> = emptyList()
+public var booksArrayList: ArrayList<Book> = arrayListOf()
 
 class ResultatFragment : Fragment() {
     private lateinit var bindingResultatFragment: FragmentResultatBinding
@@ -188,25 +187,25 @@ class ResultatFragment : Fragment() {
             fun fetchTheBook(): List<Book> {
                 // var booksList: List<Book> = emptyList()
                 bookRepository.performDatabaseOperation(Dispatchers.IO) {
-                    booksList = bookRepository.getAllBooks()
+                    booksArrayList = bookRepository.getAllBooks() as ArrayList<Book>
 
-                    if (booksList.isNotEmpty()) {
-                        println("[Dispatchers.IO] booksList size = " + booksList.last().id)
-                        println("[Inside IO]booksList = $booksList")
+                    if (booksArrayList.isNotEmpty()) {
+                        println("[Dispatchers.IO] booksList size = " + booksArrayList.last().id)
+                        println("[Inside IO]booksList = $booksArrayList")
                     }
 
                     bookRepository.performDatabaseOperation(Dispatchers.Main) {
 
-                        if (booksList.isNotEmpty()) {
-                            println("[Dispatchers.Main] booksList size = " + booksList.last().id)
-                            println("[Inside Main] bookList = $booksList")
+                        if (booksArrayList.isNotEmpty()) {
+                            println("[Dispatchers.Main] booksList size = " + booksArrayList.last().id)
+                            println("[Inside Main] bookList = $booksArrayList")
                         }
 
                     }
                 }
                 //booksTitlesFragmentArrayList.clear()
                 //for (j: Book in booksList) { booksTitlesFragmentArrayList.add( j.title.toString() ) }
-                return booksList
+                return booksArrayList
             }
 
             // OnClick special variant
