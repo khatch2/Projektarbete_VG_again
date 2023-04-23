@@ -216,9 +216,9 @@ class ResultatFragment : Fragment() {
             btnViewDatabase.setOnClickListener() {      // DONE : Go to an another Fragment of interact with the database
                 println(" btnViewDatabase was clicked. ")
                 val retFetched: ArrayList<Book> = fetchTheBook() as ArrayList<Book>
-                println(" retFetched = " + retFetched)  // TODO - It looks like that here retfetched is Nothing
+                println(" retFetched = " + retFetched)  // DONE - It looks like that here retfetched is Nothing
                 if (retFetched.isNotEmpty()) {
-                    println("RoomDB size = " + retFetched.last().id + " rows")  // TODO - Fix this after Lunch
+                    println("RoomDB size = " + retFetched.last().id + " rows")  // DONE - Fixed this after Lunch
                 }
                 Navigation.findNavController(returnedViewResultatFragment).navigate(
                     R.id.action_resultatFragment_to_viewDatabaseFragment
@@ -320,13 +320,12 @@ class ResultatFragment : Fragment() {
                 println("<===========================>")
                 println("Fetching Books from RoomDB")
                 var myFetchedBooks: ArrayList<Book> =
-                    fetchTheBook() as ArrayList<Book>  // TODO - It looks like that here myFetchedBooks.isEmpty() was true !!!
+                    fetchTheBook() as ArrayList<Book>
                 if (myFetchedBooks.isNotEmpty()) {
-                    println("RoomDB size = " + myFetchedBooks.last().id + " rows")  // TODO - Fix this after Lunch
+                    println("RoomDB size = " + myFetchedBooks.last().id + " rows")  
                 }
 
                 for (j_book: Book in myFetchedBooks) { // DONE: it must enter inside ??
-                    println("Notice: Usually the following lines cannot reach the last column in the database !!!")
                     println("Item \"searchedWord\" from myFetchedBooks is: ${j_book.searchedWord}")
                     println("Item \"authors\" from myFetchedBooks is: ${j_book.authors}")
                     println("Item \"id\" from myFetchedBooks is: ${j_book.id}")
