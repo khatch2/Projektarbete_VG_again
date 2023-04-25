@@ -98,7 +98,7 @@ class ResultatFragment : Fragment() {
         tvSecondResultTitle.setOnClickListener() {}
         tvSecondResultDescription.setOnClickListener() {}
 
-        // DONE: I want to test to change title att row 2 of db-file to "Sti"
+        // DONE: I successfully have tested it to change title att row 2 of db-file to "Sti"
         // Declaration of testingUpdate
         fun testingUpdate(intPos: Int, desiredNewString: String): Int {
             var var1: Int = 0
@@ -141,7 +141,7 @@ class ResultatFragment : Fragment() {
         }
 
         btnDeleteAtRow3Testing.setOnClickListener() {
-            testingDelete(3) // DONE : Check if it works, i.e. Here i wanted to test deleting the third row of RoomDB
+            testingDelete(3) // DONE : It works.
         }
 
 
@@ -213,12 +213,12 @@ class ResultatFragment : Fragment() {
             }
 
             // OnClick special variant
-            btnViewDatabase.setOnClickListener() {      // DONE : Go to an another Fragment of interact with the database
+            btnViewDatabase.setOnClickListener() {
                 println(" btnViewDatabase was clicked. ")
                 val retFetched: ArrayList<Book> = fetchTheBook() as ArrayList<Book>
-                println(" retFetched = " + retFetched)  // DONE - It looks like that here retfetched is Nothing
+                println(" retFetched = " + retFetched)
                 if (retFetched.isNotEmpty()) {
-                    println("RoomDB size = " + retFetched.last().id + " rows")  // DONE - Fixed this after Lunch
+                    println("RoomDB size = " + retFetched.last().id + " rows")
                 }
                 Navigation.findNavController(returnedViewResultatFragment).navigate(
                     R.id.action_resultatFragment_to_viewDatabaseFragment
@@ -325,7 +325,7 @@ class ResultatFragment : Fragment() {
                     println("RoomDB size = " + myFetchedBooks.last().id + " rows")  
                 }
 
-                for (j_book: Book in myFetchedBooks) { // DONE: it must enter inside ??
+                for (j_book: Book in myFetchedBooks) {
                     println("Item \"searchedWord\" from myFetchedBooks is: ${j_book.searchedWord}")
                     println("Item \"authors\" from myFetchedBooks is: ${j_book.authors}")
                     println("Item \"id\" from myFetchedBooks is: ${j_book.id}")
@@ -349,7 +349,6 @@ class ResultatFragment : Fragment() {
             lifecycleScope.launch {
                 repeatOnLifecycle(Lifecycle.State.STARTED) {
                     counterSearchesViewModel.uiState.collect() {
-                        // DONE : MUST to rewrite this part to achieve the Updating UI Elements
                         val mySearchQueries: Array<String> =
                             counterSearchesViewModel.uiState.value.searchQueries
                         val myCounterSearchValue: Int =

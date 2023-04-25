@@ -1,25 +1,11 @@
 package com.khatch.projektarbete_vg
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.*
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import com.khatch.projektarbete_vg.databinding.ActivityMainBinding
-import androidx.activity.viewModels
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
-import com.khatch.projektarbete_vg.apiGoogleBooks.GoogleBooks
-import com.khatch.projektarbete_vg.apiGoogleBooks.IGoogleBooks
-import com.khatch.projektarbete_vg.counterSearches.CounterSearchesViewModel
-import kotlinx.coroutines.launch
-import retrofit2.*
-import retrofit2.converter.gson.GsonConverterFactory
-import com.khatch.projektarbete_vg.book.Book
-import com.khatch.projektarbete_vg.book.BookRepository
-import com.khatch.projektarbete_vg.databinding.FragmentResultatBinding
-import kotlinx.coroutines.Dispatchers
+import kotlin.system.exitProcess
 
 
 /* https://www.googleapis.com/books/v1/volumes?q=fruntimmer */
@@ -33,6 +19,25 @@ class MainActivity : AppCompatActivity() {
         /** Set ViewBinding */
         bindingMainActivity = ActivityMainBinding.inflate(layoutInflater)
         setContentView(bindingMainActivity.root)
+
+        var builder = AlertDialog.Builder(this)
+        builder.setTitle("WARNING!")
+        builder.setMessage("This App will not receives anything from Botkyrka Library network!")
+        builder.setPositiveButton("YES, continue!") { dialog, which ->
+            run {
+                Toast.makeText(applicationContext, "Let's begin!", Toast.LENGTH_LONG).show()
+            }
+        }
+        builder.setNegativeButton("NO, exit!") { dialog, which ->
+            run {
+                exitProcess(-1)
+            }
+        }
+        builder.setNeutralButton("I didn't try this wifi network yet, ") { dialog, which ->
+            run {
+                Toast.makeText(applicationContext, "Continue on your own! ", Toast.LENGTH_LONG).show()
+            }
+        }
+        builder.show()
     }
 }
-
