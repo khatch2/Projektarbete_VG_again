@@ -46,7 +46,7 @@ class ViewDatabaseFragment : Fragment() {
         val btnViewDatabaseFragmentToResultatFragment: Button = bindingViewDatabaseFragment.btnViewDatabaseFragmentToResultatFragment
         val usersListFragment: ListView = bindingViewDatabaseFragment.listViewUsersListFragment
         val tvCounterValueFragment: TextView = bindingViewDatabaseFragment.tvCounterValueFragment
-        val btnDeleteAtRow3: Button = bindingViewDatabaseFragment.btnDeleteAtRow3
+        // val btnDeleteAtRow3: Button = bindingViewDatabaseFragment.btnDeleteAtRow3
 
         // Logic goes here
         // use ArrayAdapter and define an array
@@ -80,9 +80,7 @@ class ViewDatabaseFragment : Fragment() {
         }
         tvCounterValueFragment.setOnClickListener() {}
 
-        btnDeleteAtRow3.setOnClickListener() {
-
-        }
+        // btnDeleteAtRow3.setOnClickListener() { }
 
         return returnedViewViewDatabaseFragment
     }
